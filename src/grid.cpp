@@ -45,8 +45,8 @@ void Grid::listenClick()
 void Grid::calculateButton()
 {
     DrawRectangleRounded(Rectangle{static_cast<float>(offsetX), static_cast<float>(offsetY + gridHeight + 20), static_cast<float>(gridWidth), 50}, 0.1, 0, LIGHTGRAY);
-    int textWIDTH = MeasureText("Calculate", 25);
-    DrawTextEx(font, "Calculate", Vector2{static_cast<float>(offsetX + (gridWidth - textWIDTH) / 2), static_cast<float>(offsetY + gridHeight + 32.5)}, 25, 4, BLACK);
+    int textWIDTH = MeasureText("Calculate", 15);
+    DrawTextEx(font, "Calculate", Vector2{static_cast<float>(offsetX + (gridWidth - textWIDTH) / 2 - 10), static_cast<float>(offsetY + gridHeight + 20 + (50 - 15) / 2)}, 15, 4, BLACK);
 }
 
 std::vector<int> Grid::returnMinterms()
