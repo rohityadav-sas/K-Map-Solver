@@ -1,6 +1,4 @@
 # Karnaugh Map (K-Map) Solver in C++
-
-## Description
 This project is a Karnaugh Map (KMap) Solver written in C++. It's currently under development and uses the Raylib library for the graphical user interface.
 
 ## Table of Contents
