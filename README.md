@@ -23,7 +23,6 @@ This project is a Karnaugh Map (KMap) Solver written in C++. It's currently unde
   ```bash
   ./kmap_solver
 
-
 ## Usage
 Click on the cells in the KMap grid to toggle between 0 and 1. After setting up your KMap, click on the "Calculate" button to calculate the minterms.
 
