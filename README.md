@@ -9,13 +9,19 @@ This project is a Karnaugh Map (KMap) Solver written in C++. It's currently unde
 - [ ] Simplification of Boolean expressions (not completed yet)
 
 ## Installation
-To compile the program, use the following command:
-```bash
-g++ main.cpp grid.cpp -o kmap_solver -lraylib
 
-To run the program, use the following command:
-```bash
-./kmap_solver
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/rohityadav-sas/A-Full-Stack-To-Do-List/
+2. Navigate to the project directory:
+   ```bash
+   cd todo-list
+3. To compile the program:
+   ```bash
+   g++ main.cpp grid.cpp -o kmap_solver -lraylib
+4. To run the program:
+  ```bash
+  ./kmap_solver
 
 
 ## Usage
