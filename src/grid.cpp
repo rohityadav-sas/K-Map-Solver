@@ -22,13 +22,15 @@ void Grid::listenClick()
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
         Vector2 mousePos = GetMousePosition();
-        int col = (mousePos.x - offsetX) / cellSize;
-        int row = (mousePos.y - offsetY) / cellSize;
+        int x = mousePos.x;
+        int y = mousePos.y;
+        int col = (x - offsetX) / cellSize;
+        int row = (y - offsetY) / cellSize;
         if (row >= 0 && row < rows && col >= 0 && col < cols)
         {
             grid[row][col] = 1 - grid[row][col];
         }
-        else if (mousePos.x >= offsetX + (gridWidth - 200) / 2 && mousePos.x <= offsetX + (gridWidth - 200) / 2 + 200 && mousePos.y >= offsetY + (gridHeight - 50) + gridHeight - 30 && mousePos.y <= offsetY + (gridHeight - 50) + gridHeight - 30 + 50)
+        else if (x >= offsetX && x <= offsetX + gridWidth && y >= offsetY + gridHeight + 20 && y <= offsetY + gridHeight + 70)
         {
             minterms = returnMinterms();
             for (int item : minterms)
@@ -40,12 +42,12 @@ void Grid::listenClick()
     }
 }
 
-// void Grid::calculateButton()
-// {
-//     DrawRectangleRounded(Rectangle{static_cast<float>(offsetX + (gridWidth - 200) / 2), static_cast<float>(offsetY + (gridHeight - 50) + gridHeight - 30), 200, 50}, 0.1, 0, LIGHTGRAY);
-//     int textWIDTH = MeasureText("Calculate", 25);
-//     DrawTextEx(font, "Calculate", Vector2{static_cast<float>(offsetX + (gridWidth - 200) / 2 + (200 - textWIDTH) / 2) - 5, static_cast<float>(offsetY + (gridHeight - 50) + gridHeight - 30 + (50 - 25) / 2)}, 25, 4, BLACK);
-// }
+void Grid::calculateButton()
+{
+    DrawRectangleRounded(Rectangle{static_cast<float>(offsetX), static_cast<float>(offsetY + gridHeight + 20), static_cast<float>(gridWidth), 50}, 0.1, 0, LIGHTGRAY);
+    int textWIDTH = MeasureText("Calculate", 25);
+    DrawTextEx(font, "Calculate", Vector2{static_cast<float>(offsetX + (gridWidth - textWIDTH) / 2), static_cast<float>(offsetY + gridHeight + 32.5)}, 25, 4, BLACK);
+}
 
 std::vector<int> Grid::returnMinterms()
 {
@@ -87,6 +89,38 @@ std::vector<int> Grid::returnMinterms()
                 if (i == 1 && j == 2)
                 {
                     minterms.push_back(7);
+                }
+                if (i == 3 && j == 0)
+                {
+                    minterms.push_back(8);
+                }
+                if (i == 3 && j == 1)
+                {
+                    minterms.push_back(9);
+                }
+                if (i == 3 && j == 3)
+                {
+                    minterms.push_back(10);
+                }
+                if (i == 3 && j == 2)
+                {
+                    minterms.push_back(11);
+                }
+                if (i == 2 && j == 0)
+                {
+                    minterms.push_back(12);
+                }
+                if (i == 2 && j == 1)
+                {
+                    minterms.push_back(13);
+                }
+                if (i == 2 && j == 3)
+                {
+                    minterms.push_back(14);
+                }
+                if (i == 2 && j == 2)
+                {
+                    minterms.push_back(15);
                 }
             }
         }

@@ -7,7 +7,7 @@ int main()
     Color darkGreen = Color{20, 160, 133, 255};
     const int screenWidth = 600;
     const int screenHeight = 600;
-    fourVar grid;
+    twoVar grid;
 
     InitWindow(screenWidth, screenHeight, "K-Map Solver");
 
@@ -18,8 +18,8 @@ int main()
             BeginDrawing();
             ClearBackground(darkGreen);
             grid.Draw();
-            // grid.listenClick();
-            // grid.calculateButton();
+            grid.listenClick();
+            grid.calculateButton();
             EndDrawing();
         }
         CloseWindow();
