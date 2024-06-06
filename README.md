@@ -10,10 +10,12 @@ This project is a Karnaugh Map (KMap) Solver written in C++. It's currently unde
 
 ## Installation
 To compile the program, use the following command:
-```g++ main.cpp grid.cpp -o kmap_solver -lraylib
+```bash
+g++ main.cpp grid.cpp -o kmap_solver -lraylib
 
 To run the program, use the following command:
-```./kmap_solver
+```bash
+./kmap_solver
 
 
 ## Usage
