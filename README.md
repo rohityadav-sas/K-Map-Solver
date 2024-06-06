@@ -4,8 +4,9 @@
 This project is a Karnaugh Map (KMap) Solver written in C++. It's currently under development and uses the Raylib library for the graphical user interface.
 
 ## Features
-- [x] Interactive KMap grid
-- [x] Calculation of minterms
+- [x] Interactive K-Map Grid
+- [x] Calculation of MinTerms
+- [x] Supported upto 4 variables
 - [ ] Simplification of Boolean expressions (not completed yet)
 
 ## Installation
