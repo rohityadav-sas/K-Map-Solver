@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <raylib.h>
 
 class Grid
 {
@@ -14,11 +15,10 @@ protected:
     int gridHeight;
     int grid[20][30];
     char cellValue[2];
-    char variables[2][2];
+    Font font;
     std::vector<int> minterms;
 
 public:
-    Grid();
     void Initialize();
     void Draw();
     void listenClick();
