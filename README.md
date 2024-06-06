@@ -16,12 +16,9 @@ This project is a Karnaugh Map (KMap) Solver written in C++. It's currently unde
 2. Navigate to the project directory:
    ```bash
    cd K-Map-Solver
-3. To compile the program:
-   ```bash
-   g++ main.cpp grid.cpp -o kmap_solver -lraylib
 4. To run the program:
    ```bash
-   ./kmap_solver
+   Press F5 on your keyboard.
    
 ## Usage
 Click on the cells in the KMap grid to toggle between 0 and 1. After setting up your KMap, click on the "Calculate" button to calculate the minterms.
