@@ -12,8 +12,7 @@ int main()
     fourVar grid4;
     int currentGrid = 0;
     InitWindow(screenWidth, screenHeight, "K-Map Solver");
-
-    SetTargetFPS(10);
+    SetTargetFPS(60);
     {
         while (!WindowShouldClose())
         {
@@ -29,18 +28,21 @@ int main()
             {
                 grid2.Draw();
                 grid2.listenClick();
+                grid2.listenHover();
                 grid2.calculateButton();
             }
             if (currentGrid == 3)
             {
                 grid3.Draw();
                 grid3.listenClick();
+                grid3.listenHover();
                 grid3.calculateButton();
             }
             if (currentGrid == 4)
             {
                 grid4.Draw();
                 grid4.listenClick();
+                grid4.listenHover();
                 grid4.calculateButton();
             }
 

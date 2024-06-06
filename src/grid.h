@@ -15,12 +15,17 @@ protected:
     int gridHeight;
     int grid[20][30];
     char cellValue[2];
+    Rectangle Cell;
+    Rectangle Calculate;
+    Color CalculateColor, CalculateColorHover;
     Font font;
     std::vector<int> minterms;
 
 public:
+    Grid();
     void Initialize();
     void listenClick();
+    void listenHover();
     void calculateButton();
     std::vector<int> returnMinterms();
 };

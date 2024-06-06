@@ -4,7 +4,11 @@
 #include <iostream>
 #include <algorithm>
 
-// Font font = GetFontDefault();
+Grid::Grid()
+{
+    CalculateColor = LIGHTGRAY;
+    CalculateColorHover = {170, 170, 170, 255};
+}
 
 void Grid::Initialize()
 {
@@ -30,7 +34,7 @@ void Grid::listenClick()
         {
             grid[row][col] = 1 - grid[row][col];
         }
-        else if (x >= offsetX && x <= offsetX + gridWidth && y >= offsetY + gridHeight + 20 && y <= offsetY + gridHeight + 70)
+        else if (CheckCollisionPointRec(mousePos, Calculate))
         {
             minterms = returnMinterms();
             for (int item : minterms)
@@ -42,9 +46,36 @@ void Grid::listenClick()
     }
 }
 
+void Grid::listenHover()
+{
+    Vector2 mousePos = GetMousePosition();
+    int x = mousePos.x;
+    int y = mousePos.y;
+    int col = (x - offsetX) / cellSize;
+    int row = (y - offsetY) / cellSize;
+    if (row >= 0 && row < rows && col >= 0 && col < cols)
+    {
+        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+    }
+    else if (CheckCollisionPointRec(mousePos, Calculate))
+    {
+        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+        CalculateColor = CalculateColorHover;
+    }
+    else
+    {
+        SetMouseCursor(MOUSE_CURSOR_ARROW);
+        CalculateColor = LIGHTGRAY;
+    }
+}
+
 void Grid::calculateButton()
 {
-    DrawRectangleRounded(Rectangle{static_cast<float>(offsetX), static_cast<float>(offsetY + gridHeight + 20), static_cast<float>(gridWidth), 50}, 0.1, 0, LIGHTGRAY);
+    Calculate = {static_cast<float>(offsetX),
+                 static_cast<float>(offsetY + gridHeight + 20),
+                 static_cast<float>(gridWidth),
+                 50};
+    DrawRectangleRounded(Calculate, 0.1, 0, CalculateColor);
     int textWIDTH = MeasureText("Calculate", 15);
     DrawTextEx(font, "Calculate", Vector2{static_cast<float>(offsetX + (gridWidth - textWIDTH) / 2 - 10), static_cast<float>(offsetY + gridHeight + 20 + (50 - 15) / 2)}, 15, 4, BLACK);
 }
