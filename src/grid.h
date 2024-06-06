@@ -20,7 +20,6 @@ protected:
 
 public:
     void Initialize();
-    void Draw();
     void listenClick();
     void calculateButton();
     std::vector<int> returnMinterms();
