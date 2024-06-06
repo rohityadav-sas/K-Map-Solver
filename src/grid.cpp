@@ -76,11 +76,25 @@ std::vector<int> Grid::returnMinterms()
                 }
                 if (i == 1 && j == 0)
                 {
-                    minterms.push_back(4);
+                    if (cols == 2)
+                    {
+                        minterms.push_back(2);
+                    }
+                    else
+                    {
+                        minterms.push_back(4);
+                    }
                 }
                 if (i == 1 && j == 1)
                 {
-                    minterms.push_back(5);
+                    if (cols == 2)
+                    {
+                        minterms.push_back(3);
+                    }
+                    else
+                    {
+                        minterms.push_back(5);
+                    }
                 }
                 if (i == 1 && j == 3)
                 {
