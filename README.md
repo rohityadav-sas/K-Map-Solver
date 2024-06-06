@@ -22,3 +22,12 @@ This project is a Karnaugh Map (KMap) Solver written in C++. It's currently unde
 4. To run the program:
    ```bash
    ./kmap_solver
+   
+## Usage
+Click on the cells in the KMap grid to toggle between 0 and 1. After setting up your KMap, click on the "Calculate" button to calculate the minterms.
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+MIT
