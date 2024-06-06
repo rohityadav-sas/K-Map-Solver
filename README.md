@@ -20,5 +20,5 @@ This project is a Karnaugh Map (KMap) Solver written in C++. It's currently unde
    ```bash
    g++ main.cpp grid.cpp -o kmap_solver -lraylib
 4. To run the program:
-  ```bash
-  ./kmap_solver
+ ```bash
+   ./kmap_solver
