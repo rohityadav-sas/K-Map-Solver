@@ -55,13 +55,13 @@ void Grid::Draw()
             if (j == 0 && i == 0)
             {
                 int textWIDTH = MeasureText("00", 25);
-                DrawTextEx(font, "00", Vector2{static_cast<float>(j * cellSize + offsetX + (cellSize - textWIDTH) / 2) - cellSize - 10, static_cast<float>(i * cellSize + offsetY + (cellSize - 25) / 2)}, 25, 4, BLACK);
+                DrawTextEx(font, "0", Vector2{static_cast<float>(j * cellSize + offsetX + (cellSize - textWIDTH) / 2) - cellSize - 10, static_cast<float>(i * cellSize + offsetY + (cellSize - 25) / 2)}, 25, 4, BLACK);
                 DrawTextEx(font, "00", Vector2{static_cast<float>(j * cellSize + offsetX + (cellSize - textWIDTH) / 2), static_cast<float>(i * cellSize + offsetY + (cellSize - 25) / 2) - cellSize + 5}, 25, 4, BLACK);
             }
             if (i == 1 && j == 0)
             {
                 int textWIDTH = MeasureText("01", 25);
-                DrawTextEx(font, "01", Vector2{static_cast<float>(j * cellSize + offsetX + (cellSize - textWIDTH) / 2) - cellSize - 10, static_cast<float>(i * cellSize + offsetY + (cellSize - 25) / 2)}, 25, 8, BLACK);
+                DrawTextEx(font, "1", Vector2{static_cast<float>(j * cellSize + offsetX + (cellSize - textWIDTH) / 2) - cellSize - 10, static_cast<float>(i * cellSize + offsetY + (cellSize - 25) / 2)}, 25, 8, BLACK);
             }
             if (i == 0 && j == 1)
             {

@@ -4,7 +4,7 @@
 
 class Grid
 {
-private:
+protected:
     int rows;
     int cols;
     int cellSize;
