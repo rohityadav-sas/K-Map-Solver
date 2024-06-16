@@ -41,7 +41,7 @@ void Grid::listenClick()
             minterms = returnMinterms();
             int numberOfVariables = calculateNumberOfVariables(rows, cols);
             int numberOfMinterms = minterms.size();
-            Grid::solveKMap(numberOfVariables, numberOfMinterms, minterms);
+            std::cout << Grid::solveKMap(numberOfVariables, numberOfMinterms, minterms) << std::endl;
         }
     }
 }
@@ -180,18 +180,23 @@ int Grid::calculateNumberOfVariables(int rows, int cols)
     return log2(noOfCells);
 }
 
-void Grid::solveKMap(int numberOfVariables, int numberOfMinterms, std::vector<int> minterms)
+std::string Grid::solveKMap(int numberOfVariables, int numberOfMinterms, std::vector<int> minterms)
 {
     std::vector<std::string> primeImplicants = minimizeKMap(numberOfVariables, minterms);
 
     std::cout << "The minimized logic expression is: ";
+    std::string minimizedExpression;
     for (size_t i = 0; i < primeImplicants.size(); ++i)
     {
-        std::cout << formatImplicant(primeImplicants[i], numberOfVariables);
+        minimizedExpression += formatImplicant(primeImplicants[i], numberOfVariables);
         if (i < primeImplicants.size() - 1)
         {
-            std::cout << " + ";
+            minimizedExpression += " + ";
         }
     }
-    std::cout << std::endl;
+    if (minimizedExpression.empty())
+    {
+        minimizedExpression = "1";
+    }
+    return minimizedExpression;
 }
