@@ -41,9 +41,16 @@ void Grid::listenClick()
             minterms = returnMinterms();
             int numberOfVariables = calculateNumberOfVariables(rows, cols);
             int numberOfMinterms = minterms.size();
-            std::cout << Grid::solveKMap(numberOfVariables, numberOfMinterms, minterms) << std::endl;
+            result = Grid::solveKMap(numberOfVariables, numberOfMinterms, minterms);
+            std::cout << result << std::endl;
         }
     }
+}
+
+void Grid::printResult()
+{
+    const char *resultCStr = result.c_str();
+    DrawTextEx(font, resultCStr, Vector2{static_cast<float>(offsetX + 20), static_cast<float>(offsetY + gridHeight + 20 + 50 + 20 + (50 - 22) / 2)}, 22, 4, BLACK);
 }
 
 void Grid::listenHover()
@@ -78,6 +85,17 @@ void Grid::calculateButton()
     DrawRectangleRounded(Calculate, 0.1, 0, CalculateColor);
     int textWIDTH = MeasureText("Calculate", 15);
     DrawTextEx(font, "Calculate", Vector2{static_cast<float>(offsetX + (gridWidth - textWIDTH) / 2 - 10), static_cast<float>(offsetY + gridHeight + 20 + (50 - 15) / 2)}, 15, 4, BLACK);
+}
+
+void Grid::resultButton()
+{
+    Result = {static_cast<float>(offsetX),
+              static_cast<float>(offsetY + gridHeight + 20 + 50 + 20),
+              static_cast<float>(gridWidth),
+              50};
+    DrawRectangleRounded(Result, 0.1, 0, WHITE);
+    int textWIDTH = MeasureText("Result:", 22);
+    DrawTextEx(font, "Result:", Vector2{static_cast<float>(offsetX - (gridWidth - textWIDTH) / 2 - 80), static_cast<float>(offsetY + gridHeight + 20 + 50 + 20 + (50 - 22) / 2)}, 22, 4, BLACK);
 }
 
 std::vector<int> Grid::returnMinterms()

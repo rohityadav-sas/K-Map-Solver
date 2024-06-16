@@ -10,7 +10,7 @@ int main()
     twoVar grid2;
     threeVar grid3;
     fourVar grid4;
-    int currentGrid = 0;
+    int currentGrid = 2;
     InitWindow(screenWidth, screenHeight, "K-Map Solver");
     SetTargetFPS(60);
     {
@@ -30,6 +30,8 @@ int main()
                 grid2.listenClick();
                 grid2.listenHover();
                 grid2.calculateButton();
+                grid2.resultButton();
+                grid2.printResult();
             }
             if (currentGrid == 3)
             {
@@ -37,6 +39,8 @@ int main()
                 grid3.listenClick();
                 grid3.listenHover();
                 grid3.calculateButton();
+                grid3.resultButton();
+                grid3.printResult();
             }
             if (currentGrid == 4)
             {
@@ -44,6 +48,8 @@ int main()
                 grid4.listenClick();
                 grid4.listenHover();
                 grid4.calculateButton();
+                grid4.resultButton();
+                grid4.printResult();
             }
 
             if (IsKeyPressed(KEY_TWO))
