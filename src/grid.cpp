@@ -42,7 +42,6 @@ void Grid::listenClick()
             int numberOfVariables = calculateNumberOfVariables(rows, cols);
             int numberOfMinterms = minterms.size();
             result = Grid::solveKMap(numberOfVariables, numberOfMinterms, minterms);
-            std::cout << result << std::endl;
         }
     }
 }
