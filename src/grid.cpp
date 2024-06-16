@@ -1,8 +1,10 @@
+#include "kmapsolver.h"
 #include "grid.h"
 #include <raylib.h>
 #include <cstring>
 #include <iostream>
 #include <algorithm>
+#include <cmath>
 
 Grid::Grid()
 {
@@ -37,11 +39,9 @@ void Grid::listenClick()
         else if (CheckCollisionPointRec(mousePos, Calculate))
         {
             minterms = returnMinterms();
-            for (int item : minterms)
-            {
-                std::cout << item << ",";
-            }
-            std::cout << std::endl;
+            int numberOfVariables = calculateNumberOfVariables(rows, cols);
+            int numberOfMinterms = minterms.size();
+            Grid::solveKMap(numberOfVariables, numberOfMinterms, minterms);
         }
     }
 }
@@ -172,4 +172,26 @@ std::vector<int> Grid::returnMinterms()
     }
     std::sort(minterms.begin(), minterms.end());
     return minterms;
+}
+
+int Grid::calculateNumberOfVariables(int rows, int cols)
+{
+    int noOfCells = rows * cols;
+    return log2(noOfCells);
+}
+
+void Grid::solveKMap(int numberOfVariables, int numberOfMinterms, std::vector<int> minterms)
+{
+    std::vector<std::string> primeImplicants = minimizeKMap(numberOfVariables, minterms);
+
+    std::cout << "The minimized logic expression is: ";
+    for (size_t i = 0; i < primeImplicants.size(); ++i)
+    {
+        std::cout << formatImplicant(primeImplicants[i], numberOfVariables);
+        if (i < primeImplicants.size() - 1)
+        {
+            std::cout << " + ";
+        }
+    }
+    std::cout << std::endl;
 }

@@ -27,5 +27,7 @@ public:
     void listenClick();
     void listenHover();
     void calculateButton();
+    void solveKMap(int numberOfVariables, int numberOfMinterms, std::vector<int> minterms);
+    int calculateNumberOfVariables(int rows, int cols);
     std::vector<int> returnMinterms();
 };
