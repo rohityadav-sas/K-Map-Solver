@@ -201,7 +201,6 @@ std::string Grid::solveKMap(int numberOfVariables, int numberOfMinterms, std::ve
 {
     std::vector<std::string> primeImplicants = minimizeKMap(numberOfVariables, minterms);
 
-    std::cout << "The minimized logic expression is: ";
     std::string minimizedExpression;
     for (size_t i = 0; i < primeImplicants.size(); ++i)
     {
