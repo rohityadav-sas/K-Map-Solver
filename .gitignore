@@ -1,1 +1,2 @@
-*.exe
+build/game.exe
+.vscode
