@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <cmath>
 
+// Font font = LoadFont("./Font/monogram.ttf");
+
 Grid::Grid()
 {
     CalculateColor = LIGHTGRAY;

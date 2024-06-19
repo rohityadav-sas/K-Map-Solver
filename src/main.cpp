@@ -11,7 +11,7 @@ int main()
     threeVar grid3;
     fourVar grid4;
     int currentGrid = 2;
-    Image icon = LoadImage("favicon/favicon.png");
+    Image icon = LoadImage("./assets/kmap.png");
     InitWindow(screenWidth, screenHeight, "K-Map Solver");
     SetWindowIcon(icon);
     UnloadImage(icon);
