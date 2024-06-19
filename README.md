@@ -16,15 +16,57 @@ This project is a Karnaugh Map (KMap) Solver written in C++. It's currently unde
 
 ## Installation
 
-1. Clone the repository:
+1. Install Dependencies:
+
+   Ensure you have installed all necessary dependencies for your platform. For detailed instructions, refer to the Raylib documentation.
+
+2. Update System Environment Variables:
+
+   Add the following path to your system environment variables:
    ```bash
-   git clone https://github.com/rohityadav-sas/K-Map-Solver
-2. Navigate to the project directory:
+   C:\raylib\w64devkit\bin
+
+3. Navigate to Source Directory:
+
+   Open a terminal and navigate to the following path:
    ```bash
-   cd K-Map-Solver
-4. To run the program:
+   C:\raylib\raylib\src
+
+4. Compile Raylib:
+
+   In the terminal, run the following command:
    ```bash
-   Press F5 to build and run the project.
+   mingw32-make PLATFORM=PLATFORM_DESKTOP
+
+5. Locate Compiled Library:
+
+   After the command executes successfully, a new file named ```libraylib.a``` will be created.
+
+6. Replace Existing Library:
+
+   Copy the newly created libraylib.a file and replace the existing ```libraylib.a``` file in the lib folder within your project directory.
+
+7. Create Makefile:
+
+   Create a Makefile in your project directory and add the following content:
+   ```bash
+   # Define the source files for the project
+   SOURCES = ./src/fourvar.cpp ./src/grid.cpp ./src/kmapsolver.cpp ./src/main.cpp ./src/threevar.cpp ./src/twovar.cpp
+
+   # Default target to compile the project
+   default:
+    # Compile the source files into an executable named game.exe
+    g++ $(SOURCES) -o ./build/game.exe -g -O1 -Wall -Wno-missing-braces -I include/ -L lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
+    
+    # Run the compiled executable
+    ./build/game.exe
+
+
+8. Run the Program:
+
+   To compile and run the program, execute the following command in the terminal:
+   ```bash
+   make
    
 ## Usage
 Click on the cells in the KMap grid to toggle between 0 and 1. After setting up your KMap, click on the "Calculate" button to calculate the minterms.
