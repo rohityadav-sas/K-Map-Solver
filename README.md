@@ -16,37 +16,37 @@ This project is a Karnaugh Map (KMap) Solver written in C++. It's currently unde
 
 ## Installation
 
-1. Install Dependencies:
+1. **Install Dependencies**:
 
    Ensure you have installed all necessary dependencies for your platform. For detailed instructions, refer to the Raylib documentation.
 
-2. Update System Environment Variables:
+2. **Update System Environment Variables**:
 
    Add the following path to your system environment variables:
    ```bash
    C:\raylib\w64devkit\bin
 
-3. Navigate to Source Directory:
+3. **Navigate to Source Directory**:
 
    Open a terminal and navigate to the following path:
    ```bash
    C:\raylib\raylib\src
 
-4. Compile Raylib:
+4. **Compile Raylib**:
 
    In the terminal, run the following command:
    ```bash
    mingw32-make PLATFORM=PLATFORM_DESKTOP
 
-5. Locate Compiled Library:
+5. **Locate Compiled Library**:
 
    After the command executes successfully, a new file named ```libraylib.a``` will be created.
 
-6. Replace Existing Library:
+6. **Replace Existing Library**:
 
    Copy the newly created libraylib.a file and replace the existing ```libraylib.a``` file in the lib folder within your project directory.
 
-7. Create Makefile:
+7. **Create Makefile**:
 
    Create a Makefile in your project directory and add the following content:
    ```bash
@@ -62,7 +62,7 @@ This project is a Karnaugh Map (KMap) Solver written in C++. It's currently unde
     ./build/game.exe
 
 
-8. Run the Program:
+8. **Run the Program**:
 
    To compile and run the program, execute the following command in the terminal:
    ```bash
