@@ -20,7 +20,8 @@ protected:
     Rectangle Result;
     Color CalculateColor, CalculateColorHover;
     std::string result;
-    Font font;
+    Font Bodyfont;
+    // Font font;
     std::vector<int> minterms;
 
 public:
@@ -34,4 +35,5 @@ public:
     std::string solveKMap(int numberOfVariables, int numberOfMinterms, std::vector<int> minterms);
     int calculateNumberOfVariables(int rows, int cols);
     std::vector<int> returnMinterms();
+    bool resultCalculated = false;
 };
