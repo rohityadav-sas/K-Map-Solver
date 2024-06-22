@@ -6,7 +6,8 @@
 #include <algorithm>
 #include <cmath>
 
-// Font font = LoadFont("./Font/monogram.ttf");
+Font Bodyfont = LoadFont("./Bodyfonts/unispace.otf");
+// int Length; //for result-expression length
 
 Grid::Grid()
 {
@@ -44,14 +45,9 @@ void Grid::listenClick()
             int numberOfVariables = calculateNumberOfVariables(rows, cols);
             int numberOfMinterms = minterms.size();
             result = Grid::solveKMap(numberOfVariables, numberOfMinterms, minterms);
+            resultCalculated = true;
         }
     }
-}
-
-void Grid::printResult()
-{
-    const char *resultCStr = result.c_str();
-    DrawTextEx(font, resultCStr, Vector2{static_cast<float>(offsetX + 20), static_cast<float>(offsetY + gridHeight + 20 + 50 + 20 + (50 - 22) / 2)}, 22, 4, BLACK);
 }
 
 void Grid::listenHover()
@@ -85,18 +81,34 @@ void Grid::calculateButton()
                  50};
     DrawRectangleRounded(Calculate, 0.1, 0, CalculateColor);
     int textWIDTH = MeasureText("Calculate", 15);
-    DrawTextEx(font, "Calculate", Vector2{static_cast<float>(offsetX + (gridWidth - textWIDTH) / 2 - 10), static_cast<float>(offsetY + gridHeight + 20 + (50 - 15) / 2)}, 15, 4, BLACK);
+    DrawTextEx(Bodyfont, "Calculate", Vector2{static_cast<float>(offsetX + (gridWidth - textWIDTH) / 2 - 10), static_cast<float>(offsetY + gridHeight + 20 + (50 - 15) / 2)}, 15, 4, WHITE);
 }
 
 void Grid::resultButton()
 {
-    Result = {static_cast<float>(offsetX),
+    int resultTextWidth = MeasureText(result.c_str(), 22); //since argument of MeasureText is Array of Char. So, we converted string of C++ into Array of char
+    int padding = 30;
+
+    int textWIDTH = MeasureText("Result: ", 22);
+    int xPos = (GetScreenWidth() - (resultTextWidth+textWIDTH))/2 ; //xPos defined and used, instead of offsetX, because offsetX used in calculateButton would relocate calculate button when it is pressed  
+                                                            //offsetX is a data member, so when changed inside one method/member fxn, its value changes on other methods as well    
+
+    Result = {static_cast<float>(xPos + textWIDTH),
               static_cast<float>(offsetY + gridHeight + 20 + 50 + 20),
-              static_cast<float>(gridWidth),
+              static_cast<float>(resultTextWidth + 4 * padding),
               50};
     DrawRectangleRounded(Result, 0.1, 0, WHITE);
-    int textWIDTH = MeasureText("Result:", 22);
-    DrawTextEx(font, "Result:", Vector2{static_cast<float>(offsetX - (gridWidth - textWIDTH) / 2 - 80), static_cast<float>(offsetY + gridHeight + 20 + 50 + 20 + (50 - 22) / 2)}, 22, 4, BLACK);
+    DrawTextEx(Bodyfont, "Result: ", Vector2{static_cast<float>(xPos - 5), static_cast<float>(offsetY + gridHeight + 20 + 50 + 20 + (50 - 22) / 2)}, 22, 4, WHITE);
+    printResult();
+}
+
+void Grid::printResult()
+{
+    int textWIDTH = MeasureText("Result: ", 22);
+    int xPos = (GetScreenWidth() - (MeasureText(result.c_str(), 22)+textWIDTH))/2 ; //xPos defined and used, instead of offsetX, because offsetX used in calculateButton would relocate calculate button when it is pressed  
+                                                                            //offsetX is a data member, so when changed inside one method/member fxn, its value changes on other methods as well    
+    const char *resultCStr = result.c_str();
+    DrawTextEx(Bodyfont, resultCStr, Vector2{static_cast<float>(xPos + textWIDTH + 10), static_cast<float>(offsetY + gridHeight + 20 + 50 + 20 + (50 - 22) / 2)}, 22, 4, BLACK);
 }
 
 std::vector<int> Grid::returnMinterms()
