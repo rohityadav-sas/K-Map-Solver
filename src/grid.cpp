@@ -7,7 +7,6 @@
 #include <cmath>
 
 Font Bodyfont = LoadFont("./Bodyfonts/unispace.otf");
-// int Length; //for result-expression length
 
 Grid::Grid()
 {
@@ -86,29 +85,19 @@ void Grid::calculateButton()
 
 void Grid::resultButton()
 {
-    int resultTextWidth = MeasureText(result.c_str(), 22); //since argument of MeasureText is Array of Char. So, we converted string of C++ into Array of char
-    int padding = 30;
+    int resultWidth = MeasureText(result.c_str(), 22);
+    int rectWidth = resultWidth + 30;
+    int offSetX = (GetScreenWidth() - rectWidth) / 2;
+    int offSetY = (GetScreenHeight() - gridHeight) / 2 + gridHeight + 100;
 
-    int textWIDTH = MeasureText("Result: ", 22);
-    int xPos = (GetScreenWidth() - (resultTextWidth+textWIDTH))/2 ; //xPos defined and used, instead of offsetX, because offsetX used in calculateButton would relocate calculate button when it is pressed  
-                                                            //offsetX is a data member, so when changed inside one method/member fxn, its value changes on other methods as well    
-
-    Result = {static_cast<float>(xPos + textWIDTH),
-              static_cast<float>(offsetY + gridHeight + 20 + 50 + 20),
-              static_cast<float>(resultTextWidth + 4 * padding),
-              50};
-    DrawRectangleRounded(Result, 0.1, 0, WHITE);
-    DrawTextEx(Bodyfont, "Result: ", Vector2{static_cast<float>(xPos - 5), static_cast<float>(offsetY + gridHeight + 20 + 50 + 20 + (50 - 22) / 2)}, 22, 4, WHITE);
-    printResult();
+    DrawRectangleRounded({static_cast<float>(offSetX), static_cast<float>(offSetY), static_cast<float>(rectWidth), 50}, 0.1, 0, WHITE);
+    DrawTextEx(Bodyfont, "Result: ", Vector2{static_cast<float>(offSetX - 100), static_cast<float>(offSetY + (50 - 22) / 2)}, 22, 4, WHITE);
+    printResult(offSetX, offSetY, resultWidth, resultWidth + 50, 50);
 }
 
-void Grid::printResult()
+void Grid::printResult(int ox, int oy, int rw, int rectWidth, int rectHeight)
 {
-    int textWIDTH = MeasureText("Result: ", 22);
-    int xPos = (GetScreenWidth() - (MeasureText(result.c_str(), 22)+textWIDTH))/2 ; //xPos defined and used, instead of offsetX, because offsetX used in calculateButton would relocate calculate button when it is pressed  
-                                                                            //offsetX is a data member, so when changed inside one method/member fxn, its value changes on other methods as well    
-    const char *resultCStr = result.c_str();
-    DrawTextEx(Bodyfont, resultCStr, Vector2{static_cast<float>(xPos + textWIDTH + 10), static_cast<float>(offsetY + gridHeight + 20 + 50 + 20 + (50 - 22) / 2)}, 22, 4, BLACK);
+    DrawTextEx(Bodyfont, result.c_str(), Vector2{static_cast<float>(ox + 15), static_cast<float>(oy + (50 - 22) / 2)}, 22, 2, BLACK);
 }
 
 std::vector<int> Grid::returnMinterms()

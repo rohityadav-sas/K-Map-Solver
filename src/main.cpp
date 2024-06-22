@@ -23,8 +23,8 @@ int main()
         {
             BeginDrawing();
             ClearBackground(RAYWHITE);
-            DrawTexture(texture, screenWidth/2 - texture.width/2, screenHeight/2 - texture.height/2, WHITE);
-            int textWIDTH_title= MeasureText("KMAP SOLVER", 55);
+            DrawTexture(texture, screenWidth / 2 - texture.width / 2, screenHeight / 2 - texture.height / 2, WHITE);
+            int textWIDTH_title = MeasureText("KMAP SOLVER", 55);
             int textWIDTH2 = MeasureText("Press 2 for 2-variable K-Map", 30);
             int textWIDTH3 = MeasureText("Press 3 for 3-variable K-Map", 30);
             int textWIDTH4 = MeasureText("Press 4 for 4-variable K-Map", 30);
@@ -56,8 +56,6 @@ int main()
                 {
                     grid2.resultButton();
                 }
-                // grid2.resultButton();
-                // grid2.printResult();
             }
             if (currentGrid == 3)
             {
@@ -69,9 +67,6 @@ int main()
                 {
                     grid3.resultButton();
                 }
-                // 
-                // grid3.resultButton();
-                // grid3.printResult();
             }
             if (currentGrid == 4)
             {
@@ -83,9 +78,6 @@ int main()
                 {
                     grid4.resultButton();
                 }
-                // 
-                // grid4.resultButton();
-                // grid4.printResult();
             }
 
             EndDrawing();

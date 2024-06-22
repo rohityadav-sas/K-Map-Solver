@@ -28,7 +28,7 @@ public:
     Grid();
     void Initialize();
     void listenClick();
-    void printResult();
+    void printResult(int ox, int oy, int rw, int rectWidth, int rectHeight);
     void listenHover();
     void calculateButton();
     void resultButton();
