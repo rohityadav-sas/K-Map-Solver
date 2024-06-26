@@ -3,7 +3,7 @@
 
 fourVar::fourVar()
 {
-    Bodyfont = LoadFont("./BodyFonts/unispace.otf");
+    Bodyfont = GetFontDefault();
     rows = 4;
     cols = 4;
     cellSize = 60;

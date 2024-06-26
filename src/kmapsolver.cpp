@@ -6,6 +6,8 @@
 #include <map>
 #include <string>
 
+bool isXOR = false;
+
 std::string toBinary(int number, int width)
 {
     std::string binary = "";
@@ -37,8 +39,63 @@ bool combine(const std::string &a, const std::string &b, std::string &result)
     return differences == 1;
 }
 
+bool isXORPattern(int numInputs, const std::vector<int> &minterms)
+{
+    if (numInputs == 2 && minterms.size() == 2)
+    {
+        if ((minterms[0] == 0 && minterms[1] == 3) || (minterms[0] == 1 && minterms[1] == 2))
+        {
+            return true;
+        }
+    }
+    if (numInputs == 3 && minterms.size() == 4)
+    {
+        if ((minterms[0] == 0 && minterms[1] == 3 && minterms[2] == 5 && minterms[3] == 6) ||
+            (minterms[0] == 1 && minterms[1] == 2 && minterms[2] == 4 && minterms[3] == 7))
+        {
+            return true;
+        }
+    }
+    if (numInputs == 4 && minterms.size() == 8)
+    {
+        if ((minterms[0] == 0 && minterms[1] == 3 && minterms[2] == 5 && minterms[3] == 6 && minterms[4] == 9 && minterms[5] == 10 && minterms[6] == 12 && minterms[7] == 15) ||
+            (minterms[0] == 1 && minterms[1] == 2 && minterms[2] == 4 && minterms[3] == 7 && minterms[4] == 8 && minterms[5] == 11 && minterms[6] == 13 && minterms[7] == 14))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+std::string getXORExpression(int numInputs)
+{
+    switch (numInputs)
+    {
+    case 2:
+        return "A XOR B";
+        break;
+    case 3:
+        return "A XOR B XOR C";
+        break;
+    case 4:
+        return "A XOR B XOR C XOR D";
+        break;
+    default:
+        break;
+    }
+    return "";
+}
+
 std::vector<std::string> minimizeKMap(int numInputs, const std::vector<int> &minterms)
 {
+    if (isXORPattern(numInputs, minterms))
+    {
+        isXOR = true;
+    }
+    else
+    {
+        isXOR = false;
+    }
     int numCells = pow(2, numInputs);
     std::vector<std::string> kmap(numCells);
 
@@ -110,6 +167,10 @@ std::vector<std::string> minimizeKMap(int numInputs, const std::vector<int> &min
 
 std::string formatImplicant(const std::string &implicant, int numInputs)
 {
+    if (isXOR)
+    {
+        return getXORExpression(numInputs);
+    }
     std::string result;
     for (int i = 0; i < numInputs; ++i)
     {

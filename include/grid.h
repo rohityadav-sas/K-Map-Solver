@@ -21,17 +21,16 @@ protected:
     Color CalculateColor, CalculateColorHover;
     std::string result;
     Font Bodyfont;
-    // Font font;
     std::vector<int> minterms;
 
 public:
     Grid();
     void Initialize();
     void listenClick();
-    void printResult(int ox, int oy, int rw, int rectWidth, int rectHeight);
+    void printResult(int ox, int oy, int rw, int rectWidth, int rectHeight, Font Bodyfont);
     void listenHover();
     void calculateButton();
-    void resultButton();
+    void resultButton(Font Bodyfont);
     std::string solveKMap(int numberOfVariables, int numberOfMinterms, std::vector<int> minterms);
     int calculateNumberOfVariables(int rows, int cols);
     std::vector<int> returnMinterms();
