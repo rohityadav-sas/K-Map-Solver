@@ -1,4 +1,4 @@
-#include <raylib.h> //including the library for GUI
+#include <raylib.h>
 #include "grid.h"
 #include "gridSub.h"
 
@@ -13,11 +13,11 @@ enum Screen
 const int screenWidth = 1216;
 const int screenHeight = 809;
 const char *buttonTexts[3] = {"2", "3", "4"};
-Color buttonColors[3] = {WHITE, WHITE, WHITE}; //just initializing
+Color buttonColors[3] = {WHITE, WHITE, WHITE};
 Rectangle buttons[3] = {
     {screenWidth / 4 - 25, 185, 50, 50},
     {(2 * screenWidth) / 4 - 25, 185, 50, 50},
-    {(3*screenWidth)/4 - 25, 185, 50, 50}};
+    {(3 * screenWidth) / 4 - 25, 185, 50, 50}};
 void DrawButtons(int);
 
 int main()
@@ -40,12 +40,11 @@ int main()
         {
             BeginDrawing();
             ClearBackground(RAYWHITE);
-            DrawTexture(texture, screenWidth/2 - texture.width/2, screenHeight/2 - texture.height/2, WHITE);
-            int textWIDTH_title= MeasureText("KMAP SOLVER", 55);
+            DrawTexture(texture, screenWidth / 2 - texture.width / 2, screenHeight / 2 - texture.height / 2, WHITE);
+            int textWIDTH_title = MeasureText("KMAP SOLVER", 55);
             DrawTextEx(Titlefont, "KMAP SOLVER", Vector2{static_cast<float>(GetScreenWidth() - textWIDTH_title) / 2 - 10, 10}, 55, 4, WHITE);
             Vector2 mousePoint = GetMousePosition();
 
-            // DrawHomeScreen();
             int textWIDTH2 = MeasureText("Click '2' for 2-variable K-Map", 30);
             int textWIDTH3 = MeasureText("Click '3' for 3-variable K-Map", 30);
             int textWIDTH4 = MeasureText("Click '4' for 4-variable K-Map", 30);
@@ -58,7 +57,7 @@ int main()
                 DrawRectangleRec(buttons[i], buttonColors[i]);
                 DrawText(buttonTexts[i], buttons[i].x + (50 - MeasureText(buttonTexts[i], 22)) / 2, buttons[i].y + (50 - 20) / 2, 20, BLACK);
             }
-            
+
             if (currentScreen == HOME)
             {
                 if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
@@ -125,20 +124,6 @@ int main()
                     }
                 }
             }
-
-            // if (IsKeyPressed(KEY_TWO))
-            // {
-            //     currentGrid = 2;
-            // }
-            // if (IsKeyPressed(KEY_THREE))
-            // {
-            //     currentGrid = 3;
-            // }
-            // if (IsKeyPressed(KEY_FOUR))
-            // {
-            //     currentGrid = 4;
-            // }
-
             if (currentGrid == 2)
             {
                 grid2.Draw();
@@ -149,8 +134,6 @@ int main()
                 {
                     grid2.resultButton();
                 }
-                // grid2.resultButton();
-                // grid2.printResult();
             }
             if (currentGrid == 3)
             {
@@ -162,9 +145,7 @@ int main()
                 {
                     grid3.resultButton();
                 }
-                // 
-                // grid3.resultButton();
-                // grid3.printResult();
+                //
             }
             if (currentGrid == 4)
             {
@@ -176,9 +157,6 @@ int main()
                 {
                     grid4.resultButton();
                 }
-                // 
-                // grid4.resultButton();
-                // grid4.printResult();
             }
 
             EndDrawing();
@@ -190,24 +168,9 @@ int main()
         return 0;
     }
 }
-// void DrawHomeScreen()
-// {
-//     int textWIDTH2 = MeasureText("Click '2' for 2-variable K-Map", 30);
-//     int textWIDTH3 = MeasureText("Click '3' for 3-variable K-Map", 30);
-//     int textWIDTH4 = MeasureText("Click '4' for 4-variable K-Map", 30);
-//     DrawTextEx(Bodyfont, "Click '2' for 2-variable K-Map", Vector2{static_cast<float>(GetScreenWidth() - textWIDTH2) / 2 - 10, 75}, 30, 4, WHITE);
-//     DrawTextEx(Bodyfont, "Click '3' for 3-variable K-Map", Vector2{static_cast<float>(GetScreenWidth() - textWIDTH3) / 2 - 10, 105}, 30, 4, WHITE);
-//     DrawTextEx(Bodyfont, "Click '4' for 4-variable K-Map", Vector2{static_cast<float>(GetScreenWidth() - textWIDTH4) / 2 - 10, 135}, 30, 4, WHITE);
-//     for (int i = 0; i < 3; i++)
-//     {
-//         buttonColors[i] = WHITE;
-//         DrawRectangleRec(buttons[i], buttonColors[i]);
-//         DrawText(buttonTexts[i], buttons[i].x + (50 - MeasureText(buttonTexts[i], 22)) / 2, buttons[i].y + (50 - 20) / 2, 20, BLACK);
-//     }
-// }
-void DrawButtons( int currentGrid )
+void DrawButtons(int currentGrid)
 {
-    if(currentGrid == 2)
+    if (currentGrid == 2)
     {
         buttonColors[0] = GREEN;
         buttonColors[1] = WHITE;
@@ -218,7 +181,7 @@ void DrawButtons( int currentGrid )
             DrawText(buttonTexts[i], buttons[i].x + (50 - MeasureText(buttonTexts[i], 22)) / 2, buttons[i].y + (50 - 20) / 2, 20, BLACK);
         }
     }
-    else if(currentGrid == 3)
+    else if (currentGrid == 3)
     {
         buttonColors[0] = WHITE;
         buttonColors[1] = GREEN;
@@ -229,7 +192,7 @@ void DrawButtons( int currentGrid )
             DrawText(buttonTexts[i], buttons[i].x + (50 - MeasureText(buttonTexts[i], 22)) / 2, buttons[i].y + (50 - 20) / 2, 20, BLACK);
         }
     }
-    else if(currentGrid == 4)
+    else if (currentGrid == 4)
     {
         buttonColors[0] = WHITE;
         buttonColors[1] = WHITE;
