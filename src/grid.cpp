@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <cmath>
 
-void checkForXOR(std::string &minimizedExpression);
+bool checkForXOR(std::string &minimizedExpression);
 void checkForXOR2(std::string &minimizedExpression);
 
 Grid::Grid()
@@ -209,7 +209,10 @@ std::string Grid::solveKMap(int numberOfVariables, int numberOfMinterms, std::ve
     for (size_t i = 0; i < primeImplicants.size(); ++i)
     {
         minimizedExpression += formatImplicant(primeImplicants[i], numberOfVariables);
-        checkForXOR(minimizedExpression);
+        if (checkForXOR(minimizedExpression))
+        {
+            return minimizedExpression;
+        }
         if (i < primeImplicants.size() - 1)
         {
             minimizedExpression += " + ";
@@ -223,20 +226,24 @@ std::string Grid::solveKMap(int numberOfVariables, int numberOfMinterms, std::ve
     return minimizedExpression;
 }
 
-void checkForXOR(std::string &minimizedExpression)
+bool checkForXOR(std::string &minimizedExpression)
 {
     if (minimizedExpression == "A XOR B")
     {
         minimizedExpression = "A XOR B";
+        return true;
     }
     else if (minimizedExpression == "A XOR B XOR C")
     {
         minimizedExpression = "A XOR B XOR C";
+        return true;
     }
     else if (minimizedExpression == "A XOR B XOR C XOR D")
     {
         minimizedExpression = "A XOR B XOR C XOR D";
+        return true;
     }
+    return false;
 }
 
 void checkForXOR2(std::string &minimizedExpression)
