@@ -86,8 +86,9 @@ void Grid::calculateButton()
 
 void Grid::resultButton(Font Bodyfont)
 {
-    int resultWidth = MeasureText(result.c_str(), 22);
-    int rectWidth = resultWidth + 50;
+    Vector2 resultWidth1 = MeasureTextEx(Bodyfont, result.c_str(), 22, 2);
+    int resultWidth = resultWidth1.x;
+    int rectWidth = resultWidth + 30;
     int offSetX = (GetScreenWidth() - rectWidth) / 2;
     int offSetY = (GetScreenHeight() - gridHeight) / 2 + gridHeight + 100;
 
