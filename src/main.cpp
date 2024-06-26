@@ -11,7 +11,7 @@ enum Screen
 };
 
 const int screenWidth = 1216;
-const int screenHeight = 809;
+const int screenHeight = 1000;
 const char *buttonTexts[3] = {"2", "3", "4"};
 Color buttonColors[3] = {WHITE, WHITE, WHITE};
 Rectangle buttons[3] = {
