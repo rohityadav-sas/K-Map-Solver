@@ -42,7 +42,7 @@ int main()
             ClearBackground(RAYWHITE);
             DrawTexture(texture, screenWidth / 2 - texture.width / 2, screenHeight / 2 - texture.height / 2, WHITE);
             int textWIDTH_title = MeasureText("KMAP SOLVER", 55);
-            DrawTextEx(Titlefont, "KMAP SOLVER", Vector2{static_cast<float>(GetScreenWidth() - textWIDTH_title) / 2 - 10, 10}, 55, 4, WHITE);
+            DrawTextEx(Titlefont, "KMAP SOLVER", Vector2{static_cast<float>(GetScreenWidth() - textWIDTH_title) / 2 - 25, 10}, 55, 4, WHITE);
             Vector2 mousePoint = GetMousePosition();
 
             int textWIDTH2 = MeasureText("Click '2' for 2-variable K-Map", 30);
