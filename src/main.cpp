@@ -145,7 +145,6 @@ int main()
                 {
                     grid3.resultButton();
                 }
-                //
             }
             if (currentGrid == 4)
             {
