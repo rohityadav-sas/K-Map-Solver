@@ -4,7 +4,7 @@
 
 twoVar::twoVar()
 {
-    Bodyfont = LoadFont("./Bodyfonts/unispace.otf");
+    Bodyfont = GetFontDefault();
     rows = 2;
     cols = 2;
     cellSize = 60;

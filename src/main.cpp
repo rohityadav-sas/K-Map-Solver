@@ -31,7 +31,7 @@ int main()
     Screen currentScreen = HOME;
     Texture2D texture = LoadTexture("./assets/bgimg3.png");
     Font Titlefont = LoadFont("./fonts/batman.ttf");
-    Font Bodyfont = LoadFont("./fonts/unispace.otf");
+    Font Bodyfont = LoadFont("./fonts/unispace.ttf");
     SetWindowIcon(icon);
     UnloadImage(icon);
     SetTargetFPS(60);
@@ -132,7 +132,7 @@ int main()
                 grid2.calculateButton();
                 if (grid2.resultCalculated)
                 {
-                    grid2.resultButton();
+                    grid2.resultButton(Bodyfont);
                 }
             }
             if (currentGrid == 3)
@@ -143,7 +143,7 @@ int main()
                 grid3.calculateButton();
                 if (grid3.resultCalculated)
                 {
-                    grid3.resultButton();
+                    grid3.resultButton(Bodyfont);
                 }
             }
             if (currentGrid == 4)
@@ -154,7 +154,7 @@ int main()
                 grid4.calculateButton();
                 if (grid4.resultCalculated)
                 {
-                    grid4.resultButton();
+                    grid4.resultButton(Bodyfont);
                 }
             }
 

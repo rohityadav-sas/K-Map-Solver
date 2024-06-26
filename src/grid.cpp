@@ -6,7 +6,8 @@
 #include <algorithm>
 #include <cmath>
 
-Font Bodyfont = LoadFont("./Bodyfonts/unispace.otf");
+void checkForXOR(std::string &minimizedExpression);
+void checkForXOR2(std::string &minimizedExpression);
 
 Grid::Grid()
 {
@@ -83,7 +84,7 @@ void Grid::calculateButton()
     DrawTextEx(Bodyfont, "Calculate", Vector2{static_cast<float>(offsetX + (gridWidth - textWIDTH) / 2 - 10), static_cast<float>(offsetY + gridHeight + 20 + (50 - 15) / 2)}, 15, 4, WHITE);
 }
 
-void Grid::resultButton()
+void Grid::resultButton(Font Bodyfont)
 {
     int resultWidth = MeasureText(result.c_str(), 22);
     int rectWidth = resultWidth + 30;
@@ -92,10 +93,10 @@ void Grid::resultButton()
 
     DrawRectangleRounded({static_cast<float>(offSetX), static_cast<float>(offSetY), static_cast<float>(rectWidth), 50}, 0.1, 0, WHITE);
     DrawTextEx(Bodyfont, "Result: ", Vector2{static_cast<float>(offSetX - 100), static_cast<float>(offSetY + (50 - 22) / 2)}, 22, 4, WHITE);
-    printResult(offSetX, offSetY, resultWidth, resultWidth + 50, 50);
+    printResult(offSetX, offSetY, resultWidth, resultWidth + 50, 50, Bodyfont);
 }
 
-void Grid::printResult(int ox, int oy, int rw, int rectWidth, int rectHeight)
+void Grid::printResult(int ox, int oy, int rw, int rectWidth, int rectHeight, Font Bodyfont)
 {
     DrawTextEx(Bodyfont, result.c_str(), Vector2{static_cast<float>(ox + 15), static_cast<float>(oy + (50 - 22) / 2)}, 22, 2, BLACK);
 }
@@ -208,6 +209,7 @@ std::string Grid::solveKMap(int numberOfVariables, int numberOfMinterms, std::ve
     for (size_t i = 0; i < primeImplicants.size(); ++i)
     {
         minimizedExpression += formatImplicant(primeImplicants[i], numberOfVariables);
+        checkForXOR(minimizedExpression);
         if (i < primeImplicants.size() - 1)
         {
             minimizedExpression += " + ";
@@ -217,5 +219,50 @@ std::string Grid::solveKMap(int numberOfVariables, int numberOfMinterms, std::ve
     {
         minimizedExpression = "1";
     }
+    checkForXOR2(minimizedExpression);
     return minimizedExpression;
+}
+
+void checkForXOR(std::string &minimizedExpression)
+{
+    if (minimizedExpression == "A XOR B")
+    {
+        minimizedExpression = "A XOR B";
+    }
+    else if (minimizedExpression == "A XOR B XOR C")
+    {
+        minimizedExpression = "A XOR B XOR C";
+    }
+    else if (minimizedExpression == "A XOR B XOR C XOR D")
+    {
+        minimizedExpression = "A XOR B XOR C XOR D";
+    }
+}
+
+void checkForXOR2(std::string &minimizedExpression)
+{
+    if (minimizedExpression == "A'B + AB'")
+    {
+        minimizedExpression = "A XOR B";
+    }
+    else if (minimizedExpression == "AC' + AC'")
+    {
+        minimizedExpression = "A XOR C";
+    }
+    else if (minimizedExpression == "A'D + AD'")
+    {
+        minimizedExpression = "A XOR D";
+    }
+    else if (minimizedExpression == "B'C + BC'")
+    {
+        minimizedExpression = "B XOR C";
+    }
+    else if (minimizedExpression == "B'D + BD'")
+    {
+        minimizedExpression = "B XOR D";
+    }
+    else if (minimizedExpression == "C'D + CD'")
+    {
+        minimizedExpression = "C XOR D";
+    }
 }
