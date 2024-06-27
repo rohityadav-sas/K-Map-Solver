@@ -81,7 +81,7 @@ void Grid::calculateButton()
                  50};
     DrawRectangleRounded(Calculate, 0.1, 0, CalculateColor);
     int textWIDTH = MeasureText("Calculate", 15);
-    DrawTextEx(Bodyfont, "Calculate", Vector2{static_cast<float>(offsetX + (gridWidth - textWIDTH) / 2 - 10), static_cast<float>(offsetY + gridHeight + 20 + (50 - 15) / 2)}, 15, 4, WHITE);
+    DrawTextEx(Bodyfont, "Calculate", Vector2{static_cast<float>(offsetX + (gridWidth - textWIDTH) / 2 - 10), static_cast<float>(offsetY + gridHeight + 20 + (50 - 15) / 2)}, 15, 4, BLACK);
 }
 
 void Grid::resultButton(Font Bodyfont)
