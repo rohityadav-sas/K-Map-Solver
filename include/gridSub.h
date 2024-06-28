@@ -21,3 +21,10 @@ public:
     fourVar();
     void Draw();
 };
+
+class fiveVar : public Grid
+{
+public:
+    fiveVar();
+    void Draw();
+};
