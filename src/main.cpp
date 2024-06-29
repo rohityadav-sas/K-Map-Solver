@@ -13,7 +13,7 @@ enum Screen
 
 const int screenWidth = 1216;
 const int screenHeight = 1000;
-const char *buttonTexts[4] = {"2", "3", "4","5"};
+const char *buttonTexts[4] = {"2", "3", "4", "5"};
 Color buttonColors[4] = {WHITE, WHITE, WHITE, WHITE};
 Rectangle buttons[4] = {
     {screenWidth / 5 - 25, 225, 50, 50},
@@ -21,6 +21,7 @@ Rectangle buttons[4] = {
     {(3 * screenWidth) / 5 - 25, 225, 50, 50},
     {(4 * screenWidth) / 5 - 25, 225, 50, 50}};
 void DrawButtons(int);
+void listenHover();
 
 int main()
 {
@@ -58,7 +59,6 @@ int main()
             DrawTextEx(Bodyfont, "Click '5' for 5-variable K-Map", Vector2{static_cast<float>(GetScreenWidth() - textWIDTH5) / 2 - 10, 165}, 30, 4, WHITE);
             for (int i = 0; i < 4; i++)
             {
-                buttonColors[i] = WHITE;
                 DrawRectangleRec(buttons[i], buttonColors[i]);
                 DrawText(buttonTexts[i], buttons[i].x + (50 - MeasureText(buttonTexts[i], 22)) / 2, buttons[i].y + (50 - 20) / 2, 20, BLACK);
             }
@@ -69,18 +69,34 @@ int main()
                 {
                     if (CheckCollisionPointRec(mousePoint, buttons[0]))
                     {
+                        buttonColors[0] = GREEN;
+                        buttonColors[1] = WHITE;
+                        buttonColors[2] = WHITE;
+                        buttonColors[3] = WHITE;
                         currentScreen = TWOVAR;
                     }
                     else if (CheckCollisionPointRec(mousePoint, buttons[1]))
                     {
+                        buttonColors[1] = GREEN;
+                        buttonColors[0] = WHITE;
+                        buttonColors[2] = WHITE;
+                        buttonColors[3] = WHITE;
                         currentScreen = THREEVAR;
                     }
                     else if (CheckCollisionPointRec(mousePoint, buttons[2]))
                     {
+                        buttonColors[2] = GREEN;
+                        buttonColors[1] = WHITE;
+                        buttonColors[0] = WHITE;
+                        buttonColors[3] = WHITE;
                         currentScreen = FOURVAR;
                     }
                     else if (CheckCollisionPointRec(mousePoint, buttons[3]))
                     {
+                        buttonColors[3] = GREEN;
+                        buttonColors[1] = WHITE;
+                        buttonColors[2] = WHITE;
+                        buttonColors[0] = WHITE;
                         currentScreen = FIVEVAR;
                     }
                 }
@@ -93,14 +109,26 @@ int main()
                 {
                     if (CheckCollisionPointRec(mousePoint, buttons[1]))
                     {
+                        buttonColors[1] = GREEN;
+                        buttonColors[0] = WHITE;
+                        buttonColors[2] = WHITE;
+                        buttonColors[3] = WHITE;
                         currentScreen = THREEVAR;
                     }
                     else if (CheckCollisionPointRec(mousePoint, buttons[2]))
                     {
+                        buttonColors[2] = GREEN;
+                        buttonColors[1] = WHITE;
+                        buttonColors[0] = WHITE;
+                        buttonColors[3] = WHITE;
                         currentScreen = FOURVAR;
                     }
                     else if (CheckCollisionPointRec(mousePoint, buttons[3]))
                     {
+                        buttonColors[3] = GREEN;
+                        buttonColors[1] = WHITE;
+                        buttonColors[2] = WHITE;
+                        buttonColors[0] = WHITE;
                         currentScreen = FIVEVAR;
                     }
                 }
@@ -113,14 +141,26 @@ int main()
                 {
                     if (CheckCollisionPointRec(mousePoint, buttons[0]))
                     {
+                        buttonColors[0] = GREEN;
+                        buttonColors[1] = WHITE;
+                        buttonColors[2] = WHITE;
+                        buttonColors[3] = WHITE;
                         currentScreen = TWOVAR;
                     }
                     else if (CheckCollisionPointRec(mousePoint, buttons[2]))
                     {
+                        buttonColors[2] = GREEN;
+                        buttonColors[1] = WHITE;
+                        buttonColors[0] = WHITE;
+                        buttonColors[3] = WHITE;
                         currentScreen = FOURVAR;
                     }
                     else if (CheckCollisionPointRec(mousePoint, buttons[3]))
                     {
+                        buttonColors[3] = GREEN;
+                        buttonColors[1] = WHITE;
+                        buttonColors[2] = WHITE;
+                        buttonColors[0] = WHITE;
                         currentScreen = FIVEVAR;
                     }
                 }
@@ -133,14 +173,26 @@ int main()
                 {
                     if (CheckCollisionPointRec(mousePoint, buttons[0]))
                     {
+                        buttonColors[0] = GREEN;
+                        buttonColors[1] = WHITE;
+                        buttonColors[2] = WHITE;
+                        buttonColors[3] = WHITE;
                         currentScreen = TWOVAR;
                     }
                     else if (CheckCollisionPointRec(mousePoint, buttons[1]))
                     {
+                        buttonColors[1] = GREEN;
+                        buttonColors[0] = WHITE;
+                        buttonColors[2] = WHITE;
+                        buttonColors[3] = WHITE;
                         currentScreen = THREEVAR;
                     }
                     else if (CheckCollisionPointRec(mousePoint, buttons[3]))
                     {
+                        buttonColors[3] = GREEN;
+                        buttonColors[1] = WHITE;
+                        buttonColors[2] = WHITE;
+                        buttonColors[0] = WHITE;
                         currentScreen = FIVEVAR;
                     }
                 }
@@ -153,14 +205,26 @@ int main()
                 {
                     if (CheckCollisionPointRec(mousePoint, buttons[0]))
                     {
+                        buttonColors[0] = GREEN;
+                        buttonColors[1] = WHITE;
+                        buttonColors[2] = WHITE;
+                        buttonColors[3] = WHITE;
                         currentScreen = TWOVAR;
                     }
                     else if (CheckCollisionPointRec(mousePoint, buttons[1]))
                     {
+                        buttonColors[1] = GREEN;
+                        buttonColors[0] = WHITE;
+                        buttonColors[2] = WHITE;
+                        buttonColors[3] = WHITE;
                         currentScreen = THREEVAR;
                     }
                     else if (CheckCollisionPointRec(mousePoint, buttons[2]))
                     {
+                        buttonColors[2] = GREEN;
+                        buttonColors[1] = WHITE;
+                        buttonColors[0] = WHITE;
+                        buttonColors[3] = WHITE;
                         currentScreen = FOURVAR;
                     }
                 }
@@ -210,6 +274,7 @@ int main()
                     grid5.resultButton(Bodyfont);
                 }
             }
+            listenHover();
 
             EndDrawing();
         }
@@ -224,10 +289,6 @@ void DrawButtons(int currentGrid)
 {
     if (currentGrid == 2)
     {
-        buttonColors[0] = GREEN;
-        buttonColors[1] = WHITE;
-        buttonColors[2] = WHITE;
-        buttonColors[3] = WHITE; 
         for (int i = 0; i < 4; i++)
         {
             DrawRectangleRec(buttons[i], buttonColors[i]);
@@ -236,10 +297,6 @@ void DrawButtons(int currentGrid)
     }
     else if (currentGrid == 3)
     {
-        buttonColors[0] = WHITE;
-        buttonColors[1] = GREEN;
-        buttonColors[2] = WHITE;
-        buttonColors[3] = WHITE; 
         for (int i = 0; i < 4; i++)
         {
             DrawRectangleRec(buttons[i], buttonColors[i]);
@@ -248,10 +305,6 @@ void DrawButtons(int currentGrid)
     }
     else if (currentGrid == 4)
     {
-        buttonColors[0] = WHITE;
-        buttonColors[1] = WHITE;
-        buttonColors[2] = GREEN;
-        buttonColors[3] = WHITE; 
         for (int i = 0; i < 4; i++)
         {
             DrawRectangleRec(buttons[i], buttonColors[i]);
@@ -260,14 +313,72 @@ void DrawButtons(int currentGrid)
     }
     else if (currentGrid == 5)
     {
-        buttonColors[0] = WHITE;
-        buttonColors[1] = WHITE;
-        buttonColors[2] = WHITE;
-        buttonColors[3] = GREEN;    
         for (int i = 0; i < 4; i++)
         {
             DrawRectangleRec(buttons[i], buttonColors[i]);
             DrawText(buttonTexts[i], buttons[i].x + (50 - MeasureText(buttonTexts[i], 22)) / 2, buttons[i].y + (50 - 20) / 2, 20, BLACK);
+        }
+    }
+}
+
+void listenHover()
+{
+    Vector2 mousePoint = GetMousePosition();
+    if (CheckCollisionPointRec(mousePoint, buttons[0]))
+    {
+        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+        if (buttonColors[0].r == WHITE.r && buttonColors[0].g == WHITE.g && buttonColors[0].b == WHITE.b && buttonColors[0].a == WHITE.a)
+        {
+            std::cout << "being hovered 1st button" << std::endl;
+            buttonColors[0] = GRAY;
+        }
+    }
+    else if (CheckCollisionPointRec(mousePoint, buttons[1]))
+    {
+        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+        if (buttonColors[1].r == WHITE.r && buttonColors[1].g == WHITE.g && buttonColors[1].b == WHITE.b && buttonColors[1].a == WHITE.a)
+        {
+            std::cout << "being hovered 2nd button" << std::endl;
+            buttonColors[1] = GRAY;
+        }
+    }
+    else if (CheckCollisionPointRec(mousePoint, buttons[2]))
+    {
+        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+        if (buttonColors[2].r == WHITE.r && buttonColors[2].g == WHITE.g && buttonColors[2].b == WHITE.b && buttonColors[2].a == WHITE.a)
+        {
+            std::cout << "being hovered 3rd button" << std::endl;
+            buttonColors[2] = GRAY;
+        }
+    }
+    else if (CheckCollisionPointRec(mousePoint, buttons[3]))
+    {
+        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+        if (buttonColors[3].r == WHITE.r && buttonColors[3].g == WHITE.g && buttonColors[3].b == WHITE.b && buttonColors[3].a == WHITE.a)
+        {
+            std::cout << "being hovered 4th button" << std::endl;
+            buttonColors[3] = GRAY;
+        }
+    }
+    else
+    {
+        std::cout << "else case entered" << std::endl;
+        SetMouseCursor(MOUSE_CURSOR_ARROW);
+        if (buttonColors[0].r == GRAY.r && buttonColors[0].g == GRAY.g && buttonColors[0].b == GRAY.b && buttonColors[0].a == GRAY.a)
+        {
+            buttonColors[0] = WHITE;
+        }
+        if (buttonColors[1].r == GRAY.r && buttonColors[1].g == GRAY.g && buttonColors[1].b == GRAY.b && buttonColors[1].a == GRAY.a)
+        {
+            buttonColors[1] = WHITE;
+        }
+        if (buttonColors[2].r == GRAY.r && buttonColors[2].g == GRAY.g && buttonColors[2].b == GRAY.b && buttonColors[2].a == GRAY.a)
+        {
+            buttonColors[2] = WHITE;
+        }
+        if (buttonColors[3].r == GRAY.r && buttonColors[3].g == GRAY.g && buttonColors[3].b == GRAY.b && buttonColors[3].a == GRAY.a)
+        {
+            buttonColors[3] = WHITE;
         }
     }
 }
