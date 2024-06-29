@@ -329,7 +329,6 @@ void listenHover()
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         if (buttonColors[0].r == WHITE.r && buttonColors[0].g == WHITE.g && buttonColors[0].b == WHITE.b && buttonColors[0].a == WHITE.a)
         {
-            std::cout << "being hovered 1st button" << std::endl;
             buttonColors[0] = GRAY;
         }
     }
@@ -338,7 +337,6 @@ void listenHover()
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         if (buttonColors[1].r == WHITE.r && buttonColors[1].g == WHITE.g && buttonColors[1].b == WHITE.b && buttonColors[1].a == WHITE.a)
         {
-            std::cout << "being hovered 2nd button" << std::endl;
             buttonColors[1] = GRAY;
         }
     }
@@ -347,7 +345,6 @@ void listenHover()
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         if (buttonColors[2].r == WHITE.r && buttonColors[2].g == WHITE.g && buttonColors[2].b == WHITE.b && buttonColors[2].a == WHITE.a)
         {
-            std::cout << "being hovered 3rd button" << std::endl;
             buttonColors[2] = GRAY;
         }
     }
@@ -356,7 +353,6 @@ void listenHover()
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         if (buttonColors[3].r == WHITE.r && buttonColors[3].g == WHITE.g && buttonColors[3].b == WHITE.b && buttonColors[3].a == WHITE.a)
         {
-            std::cout << "being hovered 4th button" << std::endl;
             buttonColors[3] = GRAY;
         }
     }
