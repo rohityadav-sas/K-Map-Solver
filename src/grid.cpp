@@ -68,7 +68,6 @@ void Grid::listenHover()
     }
     else
     {
-        SetMouseCursor(MOUSE_CURSOR_ARROW);
         CalculateColor = LIGHTGRAY;
     }
 }
