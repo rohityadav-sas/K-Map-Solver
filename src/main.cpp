@@ -62,6 +62,7 @@ int main()
                 DrawRectangleRec(buttons[i], buttonColors[i]);
                 DrawText(buttonTexts[i], buttons[i].x + (50 - MeasureText(buttonTexts[i], 22)) / 2, buttons[i].y + (50 - 20) / 2, 20, BLACK);
             }
+            listenHover();
 
             if (currentScreen == HOME)
             {
@@ -274,7 +275,6 @@ int main()
                     grid5.resultButton(Bodyfont);
                 }
             }
-            listenHover();
 
             EndDrawing();
         }
