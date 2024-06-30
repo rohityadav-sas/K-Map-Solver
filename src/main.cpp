@@ -16,11 +16,10 @@ const int screenHeight = 1000;
 const char *buttonTexts[4] = {"2", "3", "4", "5"};
 Color buttonColors[4] = {WHITE, WHITE, WHITE, WHITE};
 Rectangle buttons[4] = {
-    {screenWidth / 5 - 25, 225, 50, 50},
-    {(2 * screenWidth) / 5 - 25, 225, 50, 50},
-    {(3 * screenWidth) / 5 - 25, 225, 50, 50},
-    {(4 * screenWidth) / 5 - 25, 225, 50, 50}};
-void DrawButtons(int);
+    {screenWidth / 5 - 25, 225, 70, 50},
+    {(2 * screenWidth) / 5 - 25, 225, 70, 50},
+    {(3 * screenWidth) / 5 - 25, 225, 70, 50},
+    {(4 * screenWidth) / 5 - 25, 225, 70, 50}};
 void listenHover();
 
 int main()
@@ -59,8 +58,8 @@ int main()
             DrawTextEx(Bodyfont, "Click '5' for 5-variable K-Map", Vector2{static_cast<float>(GetScreenWidth() - textWIDTH5) / 2 - 10, 165}, 30, 4, WHITE);
             for (int i = 0; i < 4; i++)
             {
-                DrawRectangleRec(buttons[i], buttonColors[i]);
-                DrawText(buttonTexts[i], buttons[i].x + (50 - MeasureText(buttonTexts[i], 22)) / 2, buttons[i].y + (50 - 20) / 2, 20, BLACK);
+                DrawRectangleRounded(buttons[i], 0.2, 0, buttonColors[i]);
+                DrawText(buttonTexts[i], buttons[i].x + (50 - MeasureText(buttonTexts[i], 22)) / 2 + 10, buttons[i].y + (50 - 20) / 2, 20, BLACK);
             }
             listenHover();
 
@@ -105,7 +104,6 @@ int main()
             else if (currentScreen == TWOVAR)
             {
                 currentGrid = 2;
-                DrawButtons(2);
                 if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
                     if (CheckCollisionPointRec(mousePoint, buttons[1]))
@@ -137,7 +135,6 @@ int main()
             else if (currentScreen == THREEVAR)
             {
                 currentGrid = 3;
-                DrawButtons(3);
                 if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
                     if (CheckCollisionPointRec(mousePoint, buttons[0]))
@@ -169,7 +166,6 @@ int main()
             else if (currentScreen == FOURVAR)
             {
                 currentGrid = 4;
-                DrawButtons(4);
                 if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
                     if (CheckCollisionPointRec(mousePoint, buttons[0]))
@@ -201,7 +197,6 @@ int main()
             else if (currentScreen == FIVEVAR)
             {
                 currentGrid = 5;
-                DrawButtons(5);
                 if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
                     if (CheckCollisionPointRec(mousePoint, buttons[0]))
@@ -285,42 +280,6 @@ int main()
         return 0;
     }
 }
-void DrawButtons(int currentGrid)
-{
-    if (currentGrid == 2)
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            DrawRectangleRec(buttons[i], buttonColors[i]);
-            DrawText(buttonTexts[i], buttons[i].x + (50 - MeasureText(buttonTexts[i], 22)) / 2, buttons[i].y + (50 - 20) / 2, 20, BLACK);
-        }
-    }
-    else if (currentGrid == 3)
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            DrawRectangleRec(buttons[i], buttonColors[i]);
-            DrawText(buttonTexts[i], buttons[i].x + (50 - MeasureText(buttonTexts[i], 22)) / 2, buttons[i].y + (50 - 20) / 2, 20, BLACK);
-        }
-    }
-    else if (currentGrid == 4)
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            DrawRectangleRec(buttons[i], buttonColors[i]);
-            DrawText(buttonTexts[i], buttons[i].x + (50 - MeasureText(buttonTexts[i], 22)) / 2, buttons[i].y + (50 - 20) / 2, 20, BLACK);
-        }
-    }
-    else if (currentGrid == 5)
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            DrawRectangleRec(buttons[i], buttonColors[i]);
-            DrawText(buttonTexts[i], buttons[i].x + (50 - MeasureText(buttonTexts[i], 22)) / 2, buttons[i].y + (50 - 20) / 2, 20, BLACK);
-        }
-    }
-}
-
 void listenHover()
 {
     Vector2 mousePoint = GetMousePosition();
