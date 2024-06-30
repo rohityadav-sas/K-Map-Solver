@@ -358,7 +358,6 @@ void listenHover()
     }
     else
     {
-        std::cout << "else case entered" << std::endl;
         SetMouseCursor(MOUSE_CURSOR_ARROW);
         if (buttonColors[0].r == GRAY.r && buttonColors[0].g == GRAY.g && buttonColors[0].b == GRAY.b && buttonColors[0].a == GRAY.a)
         {
