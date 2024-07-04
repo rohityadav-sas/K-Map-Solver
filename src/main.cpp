@@ -235,6 +235,7 @@ int main()
                 grid2.listenClick();
                 grid2.listenHover();
                 grid2.calculateButton(Bodyfont);
+                grid2.resetButton(Bodyfont);
                 if (grid2.resultCalculated)
                 {
                     grid2.resultButton(Bodyfont);
@@ -246,6 +247,7 @@ int main()
                 grid3.listenClick();
                 grid3.listenHover();
                 grid3.calculateButton(Bodyfont);
+                grid3.resetButton(Bodyfont);
                 if (grid3.resultCalculated)
                 {
                     grid3.resultButton(Bodyfont);
@@ -257,6 +259,7 @@ int main()
                 grid4.listenClick();
                 grid4.listenHover();
                 grid4.calculateButton(Bodyfont);
+                grid4.resetButton(Bodyfont);
                 if (grid4.resultCalculated)
                 {
                     grid4.resultButton(Bodyfont);
@@ -268,6 +271,7 @@ int main()
                 grid5.listenClick();
                 grid5.listenHover();
                 grid5.calculateButton(Bodyfont);
+                grid5.resetButton(Bodyfont);
                 if (grid5.resultCalculated)
                 {
                     grid5.resultButton(Bodyfont);

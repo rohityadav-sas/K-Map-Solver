@@ -17,8 +17,9 @@ protected:
     char cellValue[2];
     Rectangle Cell;
     Rectangle Calculate;
+    Rectangle Reset;
     Rectangle Result;
-    Color CalculateColor, CalculateColorHover;
+    Color CalculateColor, CalculateColorHover, ResetColor, ResetColorHover;
     Color cellSelected = {212, 180, 125, 255};
     std::string result;
     Font Bodyfont;
@@ -31,6 +32,7 @@ public:
     void printResult(int ox, int oy, int rw, int rectWidth, int rectHeight, Font Bodyfont);
     void listenHover();
     void calculateButton(Font Bodyfont);
+    void resetButton(Font Bodyfont);
     void resultButton(Font Bodyfont);
     std::string solveKMap(int numberOfVariables, int numberOfMinterms, std::vector<int> minterms);
     int calculateNumberOfVariables(int rows, int cols);
