@@ -43,23 +43,28 @@ bool isXORPattern(int numInputs, const std::vector<int> &minterms)
 {
     if (numInputs == 2 && minterms.size() == 2)
     {
-        if ((minterms[0] == 0 && minterms[1] == 3) || (minterms[0] == 1 && minterms[1] == 2))
+        if (minterms[0] == 1 && minterms[1] == 2)
         {
             return true;
         }
     }
     if (numInputs == 3 && minterms.size() == 4)
     {
-        if ((minterms[0] == 0 && minterms[1] == 3 && minterms[2] == 5 && minterms[3] == 6) ||
-            (minterms[0] == 1 && minterms[1] == 2 && minterms[2] == 4 && minterms[3] == 7))
+        if (minterms[0] == 1 && minterms[1] == 2 && minterms[2] == 4 && minterms[3] == 7)
         {
             return true;
         }
     }
     if (numInputs == 4 && minterms.size() == 8)
     {
-        if ((minterms[0] == 0 && minterms[1] == 3 && minterms[2] == 5 && minterms[3] == 6 && minterms[4] == 9 && minterms[5] == 10 && minterms[6] == 12 && minterms[7] == 15) ||
-            (minterms[0] == 1 && minterms[1] == 2 && minterms[2] == 4 && minterms[3] == 7 && minterms[4] == 8 && minterms[5] == 11 && minterms[6] == 13 && minterms[7] == 14))
+        if (minterms[0] == 1 && minterms[1] == 2 && minterms[2] == 4 && minterms[3] == 7 && minterms[4] == 8 && minterms[5] == 11 && minterms[6] == 13 && minterms[7] == 14)
+        {
+            return true;
+        }
+    }
+    if (numInputs == 5 && minterms.size() == 16)
+    {
+        if (minterms[0] == 1 && minterms[1] == 2 && minterms[2] == 4 && minterms[3] == 7 && minterms[4] == 8 && minterms[5] == 11 && minterms[6] == 13 && minterms[7] == 14 && minterms[8] == 16 && minterms[9] == 19 && minterms[10] == 21 && minterms[11] == 22 && minterms[12] == 25 && minterms[13] == 26 && minterms[14] == 28 && minterms[15] == 31)
         {
             return true;
         }
@@ -79,6 +84,9 @@ std::string getXORExpression(int numInputs)
         break;
     case 4:
         return "A XOR B XOR C XOR D";
+        break;
+    case 5:
+        return "A XOR B XOR C XOR D XOR E";
         break;
     default:
         break;
