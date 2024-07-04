@@ -42,14 +42,16 @@ void Grid::listenClick()
         else if (CheckCollisionPointRec(mousePos, Calculate))
         {
             minterms = returnMinterms();
-            for (const auto &minterm : minterms)
-            {
-                std::cout << minterm << " ";
-            }
-            std::cout << std::endl;
             int numberOfVariables = calculateNumberOfVariables(rows, cols);
             int numberOfMinterms = minterms.size();
-            result = Grid::solveKMap(numberOfVariables, numberOfMinterms, minterms);
+            if (minterms.size())
+            {
+                result = Grid::solveKMap(numberOfVariables, numberOfMinterms, minterms);
+            }
+            else
+            {
+                result = "0";
+            }
             resultCalculated = true;
         }
     }
