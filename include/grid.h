@@ -19,6 +19,7 @@ protected:
     Rectangle Calculate;
     Rectangle Result;
     Color CalculateColor, CalculateColorHover;
+    Color cellSelected = {212, 180, 125, 255};
     std::string result;
     Font Bodyfont;
     std::vector<int> minterms;
@@ -29,7 +30,7 @@ public:
     void listenClick();
     void printResult(int ox, int oy, int rw, int rectWidth, int rectHeight, Font Bodyfont);
     void listenHover();
-    void calculateButton();
+    void calculateButton(Font Bodyfont);
     void resultButton(Font Bodyfont);
     std::string solveKMap(int numberOfVariables, int numberOfMinterms, std::vector<int> minterms);
     int calculateNumberOfVariables(int rows, int cols);
