@@ -11,8 +11,8 @@ void checkForXOR2(std::string &minimizedExpression);
 
 Grid::Grid()
 {
-    CalculateColor = LIGHTGRAY;
-    CalculateColorHover = {170, 170, 170, 255};
+    CalculateColor = {255, 248, 219, 255};
+    CalculateColorHover = {223, 224, 223, 255};
 }
 
 void Grid::Initialize()
@@ -68,11 +68,11 @@ void Grid::listenHover()
     }
     else
     {
-        CalculateColor = LIGHTGRAY;
+        CalculateColor = {255, 248, 219, 255};
     }
 }
 
-void Grid::calculateButton()
+void Grid::calculateButton(Font Bodyfont)
 {
     Calculate = {static_cast<float>(offsetX),
                  static_cast<float>(offsetY + gridHeight + 20),
