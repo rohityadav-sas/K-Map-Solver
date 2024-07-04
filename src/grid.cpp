@@ -42,6 +42,11 @@ void Grid::listenClick()
         else if (CheckCollisionPointRec(mousePos, Calculate))
         {
             minterms = returnMinterms();
+            for (const auto &minterm : minterms)
+            {
+                std::cout << minterm << " ";
+            }
+            std::cout << std::endl;
             int numberOfVariables = calculateNumberOfVariables(rows, cols);
             int numberOfMinterms = minterms.size();
             result = Grid::solveKMap(numberOfVariables, numberOfMinterms, minterms);
@@ -103,90 +108,45 @@ void Grid::printResult(int ox, int oy, int rw, int rectWidth, int rectHeight, Fo
 
 std::vector<int> Grid::returnMinterms()
 {
+    int twoVar[2][2] = {
+        {0, 1},
+        {2, 3}};
+    int threeVar[2][4] = {
+        {0, 1, 3, 2},
+        {4, 5, 7, 6}};
+    int fourVar[4][4] = {
+        {0, 1, 3, 2},
+        {4, 5, 7, 6},
+        {12, 13, 15, 14},
+        {8, 9, 11, 10}};
+    int fiveVar[4][8] = {
+        {0, 1, 3, 2, 6, 7, 5, 4},
+        {8, 9, 11, 10, 14, 15, 13, 12},
+        {24, 25, 27, 26, 30, 31, 29, 28},
+        {16, 17, 19, 18, 22, 23, 21, 20}};
+
     std::vector<int> minterms;
-    for (int i = 0; i < rows; i++)
+    for (int row = 0; row < rows; row++)
     {
-        for (int j = 0; j < cols; j++)
+        for (int col = 0; col < cols; col++)
         {
-            if (grid[i][j] == 1)
+            if (grid[row][col] == 1)
             {
-                if (i == 0 && j == 0)
+                if (rows == 2 && cols == 2)
                 {
-                    minterms.push_back(0);
+                    minterms.push_back(twoVar[row][col]);
                 }
-                if (i == 0 && j == 1)
+                else if (rows == 2 && cols == 4)
                 {
-                    minterms.push_back(1);
+                    minterms.push_back(threeVar[row][col]);
                 }
-                if (i == 0 && j == 3)
+                else if (rows == 4 && cols == 4)
                 {
-                    minterms.push_back(2);
+                    minterms.push_back(fourVar[row][col]);
                 }
-                if (i == 0 && j == 2)
+                else if (rows == 4 && cols == 8)
                 {
-                    minterms.push_back(3);
-                }
-                if (i == 1 && j == 0)
-                {
-                    if (cols == 2)
-                    {
-                        minterms.push_back(2);
-                    }
-                    else
-                    {
-                        minterms.push_back(4);
-                    }
-                }
-                if (i == 1 && j == 1)
-                {
-                    if (cols == 2)
-                    {
-                        minterms.push_back(3);
-                    }
-                    else
-                    {
-                        minterms.push_back(5);
-                    }
-                }
-                if (i == 1 && j == 3)
-                {
-                    minterms.push_back(6);
-                }
-                if (i == 1 && j == 2)
-                {
-                    minterms.push_back(7);
-                }
-                if (i == 3 && j == 0)
-                {
-                    minterms.push_back(8);
-                }
-                if (i == 3 && j == 1)
-                {
-                    minterms.push_back(9);
-                }
-                if (i == 3 && j == 3)
-                {
-                    minterms.push_back(10);
-                }
-                if (i == 3 && j == 2)
-                {
-                    minterms.push_back(11);
-                }
-                if (i == 2 && j == 0)
-                {
-                    minterms.push_back(12);
-                }
-                if (i == 2 && j == 1)
-                {
-                    minterms.push_back(13);
-                }
-                if (i == 2 && j == 3)
-                {
-                    minterms.push_back(14);
-                }
-                if (i == 2 && j == 2)
-                {
-                    minterms.push_back(15);
+                    minterms.push_back(fiveVar[row][col]);
                 }
             }
         }
@@ -241,6 +201,11 @@ bool checkForXOR(std::string &minimizedExpression)
     else if (minimizedExpression == "A XOR B XOR C XOR D")
     {
         minimizedExpression = "A XOR B XOR C XOR D";
+        return true;
+    }
+    else if (minimizedExpression == "A XOR B XOR C XOR D XOR E")
+    {
+        minimizedExpression = "A XOR B XOR C XOR D XOR E";
         return true;
     }
     return false;
