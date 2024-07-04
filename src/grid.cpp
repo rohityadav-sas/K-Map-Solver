@@ -13,6 +13,8 @@ Grid::Grid()
 {
     CalculateColor = {255, 248, 219, 255};
     CalculateColorHover = {223, 224, 223, 255};
+    ResetColor = {255, 248, 219, 255};
+    ResetColorHover = {223, 224, 223, 255};
 }
 
 void Grid::Initialize()
@@ -54,6 +56,11 @@ void Grid::listenClick()
             }
             resultCalculated = true;
         }
+        else if (CheckCollisionPointRec(mousePos, Reset))
+        {
+            Initialize();
+            resultCalculated = false;
+        }
     }
 }
 
@@ -73,21 +80,59 @@ void Grid::listenHover()
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         CalculateColor = CalculateColorHover;
     }
+    else if (CheckCollisionPointRec(mousePos, Reset))
+    {
+        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+        ResetColor = ResetColorHover;
+    }
     else
     {
         CalculateColor = {255, 248, 219, 255};
+        ResetColor = {255, 248, 219, 255};
     }
 }
 
 void Grid::calculateButton(Font Bodyfont)
 {
-    Calculate = {static_cast<float>(offsetX),
-                 static_cast<float>(offsetY + gridHeight + 20),
-                 static_cast<float>(gridWidth),
-                 50};
+    int numberOfVariables = calculateNumberOfVariables(rows, cols);
+    int rectOffsetX, rectOffsetY, rectHeight, rectWidth;
+    rectOffsetX = offsetX;
+    rectOffsetY = offsetY + gridHeight + 20;
+    rectHeight = 50;
+    rectWidth = (numberOfVariables != 2) ? (gridWidth / 2 - 10) : (gridWidth - 10);
+    Calculate = {static_cast<float>(rectOffsetX),
+                 static_cast<float>(rectOffsetY),
+                 static_cast<float>(rectWidth),
+                 static_cast<float>(rectHeight)};
     DrawRectangleRounded(Calculate, 0.1, 0, CalculateColor);
-    int textWIDTH = MeasureText("Calculate", 15);
-    DrawTextEx(Bodyfont, "Calculate", Vector2{static_cast<float>(offsetX + (gridWidth - textWIDTH) / 2 - 10), static_cast<float>(offsetY + gridHeight + 20 + (50 - 15) / 2)}, 15, 4, BLACK);
+    int fontSize = (numberOfVariables == 5) ? 15 : 14;
+    int textOffsetX, textOffsetY, textHeight, textWidth;
+    textWidth = MeasureTextEx(Bodyfont, "Calculate", fontSize, 4).x;
+    textHeight = MeasureTextEx(Bodyfont, "Calculate", fontSize, 4).y;
+    textOffsetX = offsetX + (rectWidth - textWidth) / 2;
+    textOffsetY = offsetY + gridHeight + 20 + (50 - textHeight) / 2;
+    DrawTextEx(Bodyfont, "Calculate", Vector2{static_cast<float>(textOffsetX), static_cast<float>(textOffsetY)}, fontSize, 4, BLACK);
+}
+
+void Grid::resetButton(Font Bodyfont)
+{
+    int numberOfVariables = calculateNumberOfVariables(rows, cols);
+    int rectOffsetX, rectOffsetY, rectHeight, rectWidth;
+    rectOffsetX = (numberOfVariables != 2) ? (offsetX + (gridWidth / 2) + 10) : (offsetX);
+    rectOffsetY = (numberOfVariables != 2) ? (offsetY + gridHeight + 20) : (offsetY + gridHeight + 90);
+    rectHeight = 50;
+    rectWidth = (numberOfVariables != 2) ? (gridWidth / 2 - 10) : (gridWidth - 10);
+    Reset = {static_cast<float>(rectOffsetX),
+             static_cast<float>(rectOffsetY),
+             static_cast<float>(rectWidth),
+             static_cast<float>(rectHeight)};
+    DrawRectangleRounded(Reset, 0.1, 0, ResetColor);
+    int textOffsetX, textOffsetY, textHeight, textWidth;
+    textWidth = MeasureTextEx(Bodyfont, "Reset", 15, 4).x;
+    textHeight = MeasureTextEx(Bodyfont, "Reset", 15, 4).y;
+    textOffsetX = rectOffsetX + (rectWidth - textWidth) / 2;
+    textOffsetY = rectOffsetY + (rectHeight - textHeight) / 2;
+    DrawTextEx(Bodyfont, "Reset", Vector2{static_cast<float>(textOffsetX), static_cast<float>(textOffsetY)}, 15, 4, BLACK);
 }
 
 void Grid::resultButton(Font Bodyfont)
@@ -96,7 +141,7 @@ void Grid::resultButton(Font Bodyfont)
     int resultWidth = resultWidth1.x;
     int rectWidth = resultWidth + 30;
     int offSetX = (GetScreenWidth() - rectWidth) / 2;
-    int offSetY = (GetScreenHeight() - gridHeight) / 2 + gridHeight + 100;
+    int offSetY = (GetScreenHeight() - gridHeight) / 2 + gridHeight + 150;
 
     DrawRectangleRounded({static_cast<float>(offSetX), static_cast<float>(offSetY), static_cast<float>(rectWidth), 50}, 0.1, 0, WHITE);
     DrawTextEx(Bodyfont, "Result: ", Vector2{static_cast<float>(offSetX - 100), static_cast<float>(offSetY + (50 - 22) / 2)}, 22, 4, WHITE);
