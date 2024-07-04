@@ -44,11 +44,11 @@ void Grid::listenClick()
         else if (CheckCollisionPointRec(mousePos, Calculate))
         {
             minterms = returnMinterms();
-            for (int minterm : minterms)
+            for (auto i : minterms)
             {
-                cout << minterm << ' ';
+                std::cout << i << " ";
             }
-            cout << '\n';
+            std::cout << std::endl;
             int numberOfVariables = calculateNumberOfVariables(rows, cols);
             int numberOfMinterms = minterms.size();
             if (minterms.size())
