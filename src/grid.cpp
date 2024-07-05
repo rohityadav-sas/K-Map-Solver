@@ -273,7 +273,10 @@ void Grid::visualizeKmap()
     string filename = "./build/logic-circuit.png";
     const int screenWidth = 800;
     const int screenHeight = 600;
+    Image icon = LoadImage("./assets/loading.png");
     InitWindow(screenWidth, screenHeight, "Loading...");
+    SetWindowIcon(icon);
+    UnloadImage(icon);
     SimulateLoading(4.0f);
     while (true)
     {
