@@ -5,9 +5,19 @@
 #include <iostream>
 #include <algorithm>
 #include <cmath>
+#include <cstdlib>
+#include <string>
+#include <thread>
+#include <chrono>
+#include <filesystem>
+#include <cstdio>
 
-bool checkForXOR(std::string &minimizedExpression);
-void checkForXOR2(std::string &minimizedExpression);
+using namespace std;
+
+namespace fs = std::filesystem;
+
+bool checkForXOR(string &minimizedExpression);
+void checkForXOR2(string &minimizedExpression);
 
 Grid::Grid()
 {
@@ -46,9 +56,9 @@ void Grid::listenClick()
             minterms = returnMinterms();
             for (auto i : minterms)
             {
-                std::cout << i << " ";
+                cout << i << " ";
             }
-            std::cout << std::endl;
+            cout << endl;
             int numberOfVariables = calculateNumberOfVariables(rows, cols);
             int numberOfMinterms = minterms.size();
             if (minterms.size())
@@ -60,11 +70,11 @@ void Grid::listenClick()
                 result = "0";
             }
             resultCalculated = true;
+            resultButton(Bodyfont);
         }
         else if (CheckCollisionPointRec(mousePos, Reset))
         {
-            Initialize();
-            resultCalculated = false;
+            visualizeKmap();
         }
     }
 }
@@ -119,7 +129,7 @@ void Grid::calculateButton(Font Bodyfont)
     DrawTextEx(Bodyfont, "Calculate", Vector2{static_cast<float>(textOffsetX), static_cast<float>(textOffsetY)}, fontSize, 4, BLACK);
 }
 
-void Grid::resetButton(Font Bodyfont)
+void Grid::visualizeButton(Font Bodyfont)
 {
     int numberOfVariables = calculateNumberOfVariables(rows, cols);
     int rectOffsetX, rectOffsetY, rectHeight, rectWidth;
@@ -133,11 +143,11 @@ void Grid::resetButton(Font Bodyfont)
              static_cast<float>(rectHeight)};
     DrawRectangleRounded(Reset, 0.1, 0, ResetColor);
     int textOffsetX, textOffsetY, textHeight, textWidth;
-    textWidth = MeasureTextEx(Bodyfont, "Reset", 15, 4).x;
-    textHeight = MeasureTextEx(Bodyfont, "Reset", 15, 4).y;
+    textWidth = MeasureTextEx(Bodyfont, "Visualize", 15, 4).x;
+    textHeight = MeasureTextEx(Bodyfont, "Visualize", 15, 4).y;
     textOffsetX = rectOffsetX + (rectWidth - textWidth) / 2;
     textOffsetY = rectOffsetY + (rectHeight - textHeight) / 2;
-    DrawTextEx(Bodyfont, "Reset", Vector2{static_cast<float>(textOffsetX), static_cast<float>(textOffsetY)}, 15, 4, BLACK);
+    DrawTextEx(Bodyfont, "Visualize", Vector2{static_cast<float>(textOffsetX), static_cast<float>(textOffsetY)}, 15, 4, BLACK);
 }
 
 void Grid::resultButton(Font Bodyfont)
@@ -158,7 +168,7 @@ void Grid::printResult(int ox, int oy, int rw, int rectWidth, int rectHeight, Fo
     DrawTextEx(Bodyfont, result.c_str(), Vector2{static_cast<float>(ox + 15), static_cast<float>(oy + (50 - 22) / 2)}, 22, 2, BLACK);
 }
 
-std::vector<int> Grid::returnMinterms()
+vector<int> Grid::returnMinterms()
 {
     int twoVar[2][2] = {
         {0, 1},
@@ -177,7 +187,7 @@ std::vector<int> Grid::returnMinterms()
         {24, 25, 27, 26, 30, 31, 29, 28},
         {16, 17, 19, 18, 22, 23, 21, 20}};
 
-    std::vector<int> minterms;
+    vector<int> minterms;
     for (int row = 0; row < rows; row++)
     {
         for (int col = 0; col < cols; col++)
@@ -203,8 +213,91 @@ std::vector<int> Grid::returnMinterms()
             }
         }
     }
-    std::sort(minterms.begin(), minterms.end());
+    sort(minterms.begin(), minterms.end());
     return minterms;
+}
+
+void Grid::SimulateLoading(float duration)
+{
+    float timeElapsed = 0.0f;
+    const int screenWidth = 800;
+    const int screenHeight = 600;
+
+    while (timeElapsed < duration)
+    {
+        timeElapsed += GetFrameTime();
+        float progress = timeElapsed / duration;
+
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+
+        // Draw loading text
+        DrawText("Loading...", screenWidth / 2 - MeasureText("Loading...", 20) / 2, screenHeight / 2 - 50, 20, DARKGRAY);
+
+        // Draw progress bar background
+        DrawRectangle(screenWidth / 2 - 150, screenHeight / 2, 300, 30, LIGHTGRAY);
+
+        // Draw progress bar
+        DrawRectangle(screenWidth / 2 - 150, screenHeight / 2, 300 * progress, 30, DARKGRAY);
+
+        // Draw progress percentage
+        DrawText(TextFormat("%d%%", (int)(progress * 100)), screenWidth / 2 - MeasureText(TextFormat("%d%%", (int)(progress * 100)), 20) / 2, screenHeight / 2 + 5, 20, WHITE);
+
+        EndDrawing();
+    }
+}
+
+void performHttpRequest(string Uri, string body)
+{
+    string command = "powershell.exe -Command \"Invoke-WebRequest -Uri " + Uri + " -Method Post -Body '" + body + "' > $null\"";
+    system(command.c_str());
+}
+
+void Grid::visualizeKmap()
+{
+    int numberOfVariables = calculateNumberOfVariables(rows, cols);
+    string Uri = "http://localhost:3000/solve" + to_string(numberOfVariables) + "var";
+    minterms = returnMinterms();
+    string body = "";
+    for (auto i = 0; i < static_cast<int>(minterms.size()); i++)
+    {
+        body += (i == 0) ? "minterms[]=" : "&minterms[]=";
+        body += to_string(minterms[i]);
+    }
+    // string command = "powershell.exe -Command \"Invoke-WebRequest -Uri " + Uri + " -Method Post -Body '" + body + "' > $null\"";
+    // system(command.c_str());
+    thread httpRequestThread(performHttpRequest, Uri, body);
+    CloseWindow();
+    const char *files = "./build/logic-circuit.png";
+    std::remove(files);
+    string filename = "./build/logic-circuit.png";
+    const int screenWidth = 800;
+    const int screenHeight = 600;
+    InitWindow(screenWidth, screenHeight, "Loading...");
+    SimulateLoading(4.0f);
+    while (true)
+    {
+        if (fs::exists(filename))
+        {
+            CloseWindow(); // Close the loading screen window
+            InitWindow(800, 800, "Logic Circuit Visualization");
+            Texture2D background = LoadTexture("./build/logic-circuit.png");
+            Image icon = LoadImage("./assets/logic.png");
+            SetWindowSize(background.width, background.height);
+            SetWindowIcon(icon);
+            UnloadImage(icon);
+            while (!WindowShouldClose())
+            {
+                BeginDrawing();
+                ClearBackground(RAYWHITE);
+                DrawTexture(background, 0, 0, WHITE);
+                EndDrawing();
+            }
+            UnloadTexture(background);
+            CloseWindow();
+            break;
+        }
+    }
 }
 
 int Grid::calculateNumberOfVariables(int rows, int cols)
@@ -213,11 +306,11 @@ int Grid::calculateNumberOfVariables(int rows, int cols)
     return log2(noOfCells);
 }
 
-std::string Grid::solveKMap(int numberOfVariables, int numberOfMinterms, std::vector<int> minterms)
+string Grid::solveKMap(int numberOfVariables, int numberOfMinterms, vector<int> minterms)
 {
-    std::vector<std::string> primeImplicants = minimizeKMap(numberOfVariables, minterms);
+    vector<string> primeImplicants = minimizeKMap(numberOfVariables, minterms);
 
-    std::string minimizedExpression;
+    string minimizedExpression;
     for (size_t i = 0; i < primeImplicants.size(); ++i)
     {
         minimizedExpression += formatImplicant(primeImplicants[i], numberOfVariables);
@@ -238,7 +331,7 @@ std::string Grid::solveKMap(int numberOfVariables, int numberOfMinterms, std::ve
     return minimizedExpression;
 }
 
-bool checkForXOR(std::string &minimizedExpression)
+bool checkForXOR(string &minimizedExpression)
 {
     if (minimizedExpression == "A XOR B")
     {
@@ -263,7 +356,7 @@ bool checkForXOR(std::string &minimizedExpression)
     return false;
 }
 
-void checkForXOR2(std::string &minimizedExpression)
+void checkForXOR2(string &minimizedExpression)
 {
     if (minimizedExpression == "A'B + AB'")
     {
