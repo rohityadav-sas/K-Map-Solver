@@ -32,10 +32,12 @@ public:
     void printResult(int ox, int oy, int rw, int rectWidth, int rectHeight, Font Bodyfont);
     void listenHover();
     void calculateButton(Font Bodyfont);
-    void resetButton(Font Bodyfont);
+    void visualizeButton(Font Bodyfont);
     void resultButton(Font Bodyfont);
     std::string solveKMap(int numberOfVariables, int numberOfMinterms, std::vector<int> minterms);
     int calculateNumberOfVariables(int rows, int cols);
     std::vector<int> returnMinterms();
     bool resultCalculated = false;
+    void visualizeKmap();
+    void SimulateLoading(float duration);
 };
