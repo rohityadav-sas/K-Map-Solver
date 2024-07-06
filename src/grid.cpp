@@ -264,8 +264,6 @@ void Grid::visualizeKmap()
         body += (i == 0) ? "minterms[]=" : "&minterms[]=";
         body += to_string(minterms[i]);
     }
-    // string command = "powershell.exe -Command \"Invoke-WebRequest -Uri " + Uri + " -Method Post -Body '" + body + "' > $null\"";
-    // system(command.c_str());
     thread httpRequestThread(performHttpRequest, Uri, body);
     CloseWindow();
     const char *files = "./build/logic-circuit.png";
@@ -288,6 +286,7 @@ void Grid::visualizeKmap()
             Image icon = LoadImage("./assets/logic.png");
             SetWindowSize(background.width, background.height);
             SetWindowIcon(icon);
+            SetWindowPosition((GetMonitorWidth(0) - background.width) / 2, (GetMonitorHeight(0) - background.height) / 2);
             UnloadImage(icon);
             while (!WindowShouldClose())
             {
