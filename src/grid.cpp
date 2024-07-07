@@ -11,6 +11,7 @@
 #include <chrono>
 #include <filesystem>
 #include <cstdio>
+#include <future>
 
 using namespace std;
 
@@ -256,7 +257,8 @@ void performHttpRequest(string Uri, string body)
 void Grid::visualizeKmap()
 {
     int numberOfVariables = calculateNumberOfVariables(rows, cols);
-    string Uri = "http://localhost:3000/solve" + to_string(numberOfVariables) + "var";
+    // string Uri = "http://localhost:3000/solve" + to_string(numberOfVariables) + "var"; // For server hosted locally
+    string Uri = "https://k-map-visualizer.onrender.com/solve" + to_string(numberOfVariables) + "var"; // For server hosted on render
     minterms = returnMinterms();
     string body = "";
     for (auto i = 0; i < static_cast<int>(minterms.size()); i++)
@@ -264,7 +266,16 @@ void Grid::visualizeKmap()
         body += (i == 0) ? "minterms[]=" : "&minterms[]=";
         body += to_string(minterms[i]);
     }
-    thread httpRequestThread(performHttpRequest, Uri, body);
+    // Start HTTP request in a separate thread
+    promise<void> httpRequestPromise;
+    future<void> httpRequestFuture = httpRequestPromise.get_future();
+
+    thread httpRequestThread([&]()
+                             {
+                                 performHttpRequest(Uri, body);
+                                 httpRequestPromise.set_value(); // Notify promise when done
+                             });
+
     CloseWindow();
     const char *files = "./build/logic-circuit.png";
     std::remove(files);
@@ -275,7 +286,11 @@ void Grid::visualizeKmap()
     InitWindow(screenWidth, screenHeight, "Loading...");
     SetWindowIcon(icon);
     UnloadImage(icon);
-    SimulateLoading(4.0f);
+    SimulateLoading(8.0f);
+    // httpRequestFuture.wait();
+    // string downloadImage = "powershell.exe -Command \"Invoke-WebRequest -Uri http://localhost:3000/logic-circuit.png -OutFile " + filename + " > $null\""; // For server hosted locally
+    string downloadImage = "powershell.exe -Command \"Invoke-WebRequest -Uri https://k-map-visualizer.onrender.com/logic-circuit.png -OutFile " + filename + " > $null\""; // For server hosted on render
+    system(downloadImage.c_str());
     while (true)
     {
         if (fs::exists(filename))
