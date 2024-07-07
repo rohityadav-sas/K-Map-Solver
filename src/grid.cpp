@@ -286,7 +286,7 @@ void Grid::visualizeKmap()
     InitWindow(screenWidth, screenHeight, "Loading...");
     SetWindowIcon(icon);
     UnloadImage(icon);
-    SimulateLoading(8.0f);
+    SimulateLoading(10.0f);
     // string downloadImage = "powershell.exe -Command \"Invoke-WebRequest -Uri http://localhost:3000/logic-circuit.png -OutFile " + filename + " > $null\""; // For server hosted locally
     string downloadImage = "powershell.exe -Command \"Invoke-WebRequest -Uri https://k-map-visualizer.onrender.com/logic-circuit.png -OutFile " + filename + " > $null\""; // For server hosted on render
     system(downloadImage.c_str());
