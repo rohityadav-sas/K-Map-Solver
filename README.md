@@ -1,5 +1,5 @@
 # Karnaugh Map (K-Map) Solver in C++
-This project is a Karnaugh Map (KMap) Solver written in C++. It's currently under development and uses the Raylib library for the graphical user interface.
+This project contains a robust and efficient KMap Solver developed in C++. The project utilizes the Raylib library to provide a visually appealing and user-friendly graphical interface, making it easy to input, manipulate, and visualize Karnaugh maps.
 
 ## Table of Contents
 - [Features](#features)
@@ -9,10 +9,10 @@ This project is a Karnaugh Map (KMap) Solver written in C++. It's currently unde
 - [License](#license)
 
 ## Features
-- [x] Interactive K-Map Grid
-- [x] Calculation of MinTerms
-- [x] Supported upto 5 variables
-- [x] Simplification of Boolean expressions
+-  Interactive K-Map Grid
+-  Calculation of MinTerms
+-  Supported upto 5 variables
+-  Simplification of Boolean Expressions
 
 ## Installation
 
@@ -69,7 +69,7 @@ This project is a Karnaugh Map (KMap) Solver written in C++. It's currently unde
    make
    
 ## Usage
-Click on the cells in the KMap grid to toggle between 0 and 1. After setting up your KMap, click on the "Calculate" button to calculate the minterms.
+Click on the cells in the K-Map Grid to flip between 0 and 1. After configuring your K-Map, click the "Calculate" button to compute the minterms. The "Visualize" option allows you to see the K-Map Expression using logic gates.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
