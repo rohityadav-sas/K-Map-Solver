@@ -1,10 +1,7 @@
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer');
 
 async function image(content) {
-    const browser = await puppeteer.launch({
-        executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
-        headless: true
-    });
+    const browser = await puppeteer.launch();
 
     const page = await browser.newPage();
     await page.setContent(content, { waitUntil: 'networkidle0' });
