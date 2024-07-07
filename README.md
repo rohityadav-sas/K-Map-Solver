@@ -11,8 +11,8 @@ This project is a Karnaugh Map (KMap) Solver written in C++. It's currently unde
 ## Features
 - [x] Interactive K-Map Grid
 - [x] Calculation of MinTerms
-- [x] Supported upto 4 variables
-- [x] Simplification of Boolean expressions (not completed yet)
+- [x] Supported upto 5 variables
+- [x] Simplification of Boolean expressions
 
 ## Installation
 
