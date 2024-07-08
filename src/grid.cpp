@@ -257,8 +257,9 @@ void performHttpRequest(string Uri, string body)
 void Grid::visualizeKmap()
 {
     int numberOfVariables = calculateNumberOfVariables(rows, cols);
-    string Uri = "http://localhost:3000/solve" + to_string(numberOfVariables) + "var"; // For server hosted locally
+    // string Uri = "http://localhost:3000/solve" + to_string(numberOfVariables) + "var"; // For server hosted locally
     // string Uri = "https://k-map-visualizer.onrender.com/solve" + to_string(numberOfVariables) + "var"; // For server hosted on render
+    string Uri = "https://k-map-visualizer-production.up.railway.app/solve" + to_string(numberOfVariables) + "var"; // For server hosted on railway
     minterms = returnMinterms();
     string body = "";
     for (auto i = 0; i < static_cast<int>(minterms.size()); i++)
