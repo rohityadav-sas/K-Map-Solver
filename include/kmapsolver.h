@@ -1,3 +1,5 @@
+//prototype/fxn definitions for solving kmap
+
 #ifndef KMAP_SOLVER_H
 #define KMAP_SOLVER_H
 

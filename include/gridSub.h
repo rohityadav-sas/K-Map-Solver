@@ -1,3 +1,7 @@
+//Inherits grid class
+//child classes/sub classes for drawing grids for various variable KMAP solver
+//Draw fxn is different for different variable KMAPs
+
 #pragma once
 #include "grid.h"
 
