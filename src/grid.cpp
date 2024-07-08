@@ -251,7 +251,7 @@ void Grid::SimulateLoading(float duration)
 
 void performHttpRequest(string Uri, string body)
 {
-    string command = "powershell.exe -Command \"Invoke-WebRequest -Uri " + Uri + " -Method Post -Body '" + body + "' > $null\"";
+    string command = "powershell.exe -Command \"Invoke-WebRequest -Uri " + Uri + " -Method Post -Body '" + body + "' -OutFile './build/circuit.png' > $null\"";
     system(command.c_str());
 }
 
@@ -259,7 +259,8 @@ void Grid::visualizeKmap()
 {
     int numberOfVariables = calculateNumberOfVariables(rows, cols);
     // string Uri = "http://localhost:3000/solve" + to_string(numberOfVariables) + "var"; // For server hosted locally
-    string Uri = "https://k-map-visualizer.onrender.com/solve" + to_string(numberOfVariables) + "var"; // For server hosted on render
+    // string Uri = "https://k-map-visualizer.onrender.com/solve" + to_string(numberOfVariables) + "var"; // For server hosted on render
+    string Uri = "https://k-map-visualizer-production.up.railway.app/solve" + to_string(numberOfVariables) + "var"; // For server hosted on railway
     minterms = returnMinterms();
     string body = "";
     for (auto i = 0; i < static_cast<int>(minterms.size()); i++)
@@ -278,26 +279,23 @@ void Grid::visualizeKmap()
                              });
 
     CloseWindow();
-    const char *files = "./build/logic-circuit.png";
+    const char *files = "./build/circuit.png";
     std::remove(files);
-    string filename = "./build/logic-circuit.png";
+    string filename = "./build/circuit.png";
     const int screenWidth = 800;
     const int screenHeight = 600;
     Image icon = LoadImage("./assets/loading.png");
     InitWindow(screenWidth, screenHeight, "Loading...");
     SetWindowIcon(icon);
     UnloadImage(icon);
-    SimulateLoading(10.0f);
-    // string downloadImage = "powershell.exe -Command \"Invoke-WebRequest -Uri http://localhost:3000/logic-circuit.png -OutFile " + filename + " > $null\""; // For server hosted locally
-    string downloadImage = "powershell.exe -Command \"Invoke-WebRequest -Uri https://k-map-visualizer.onrender.com/logic-circuit.png -OutFile " + filename + " > $null\""; // For server hosted on render
-    system(downloadImage.c_str());
+    SimulateLoading(3.0f);
     while (true)
     {
         if (fs::exists(filename))
         {
             CloseWindow(); // Close the loading screen window
             InitWindow(800, 800, "Logic Circuit Visualization");
-            Texture2D background = LoadTexture("./build/logic-circuit.png");
+            Texture2D background = LoadTexture("./build/circuit.png");
             Image icon = LoadImage("./assets/logic.png");
             SetWindowSize(background.width, background.height);
             SetWindowIcon(icon);
