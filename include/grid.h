@@ -1,3 +1,5 @@
+//declares class for drawing grids
+//prototype for grid class, that is used to draw grids of kmap
 #pragma once
 #include <iostream>
 #include <vector>
