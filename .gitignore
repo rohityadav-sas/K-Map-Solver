@@ -1,4 +1,4 @@
 *.exe
 .vscode
 node_modules
-logic-circuit.png
+circuit.png
