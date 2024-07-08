@@ -1,24 +1,25 @@
-#include "kmapsolver.h"
-#include "grid.h"
-#include <raylib.h>
-#include <cstring>
-#include <iostream>
-#include <algorithm>
-#include <cmath>
-#include <cstdlib>
-#include <string>
-#include <thread>
-#include <chrono>
-#include <filesystem>
-#include <cstdio>
-#include <future>
+#include "kmapsolver.h" // Include the header file for KMapSolver class which likely handles Karnaugh map solving operations
+#include "grid.h" // Include the header file for Grid class which likely handles grid-related functionalities
+#include <raylib.h> // Include the Raylib library for graphics and game development functions
+#include <cstring> // Include the C string library for handling C-style strings and various string manipulation functions
+#include <iostream> // Include the input/output stream library for handling standard input and output operations
+#include <algorithm> // Include the algorithm library for common algorithms like sorting, searching, etc.
+#include <cmath> // Include the math library for mathematical functions and calculations
+#include <cstdlib> // Include the standard library for general purpose functions like memory allocation, random number generation, etc.
+#include <string> // Include the string library for handling C++ style strings
+#include <thread> // Include the thread library for multi-threading functionalities
+#include <chrono> // Include the chrono library for time-related functions, such as measuring time intervals
+#include <filesystem> // Include the filesystem library for file and directory manipulation
+#include <cstdio> // Include the C standard input/output library for C-style input and output functions
+#include <future> // Include the future library for asynchronous programming and concurrency
+                  // compiler moves on to other lines while compiling  
+
 
 using namespace std;
 
 namespace fs = std::filesystem;
 
 bool checkForXOR(string &minimizedExpression);
-void checkForXOR2(string &minimizedExpression);
 
 Grid::Grid()
 {
@@ -341,7 +342,6 @@ string Grid::solveKMap(int numberOfVariables, int numberOfMinterms, vector<int> 
     {
         minimizedExpression = "1";
     }
-    checkForXOR2(minimizedExpression);
     return minimizedExpression;
 }
 
@@ -368,32 +368,4 @@ bool checkForXOR(string &minimizedExpression)
         return true;
     }
     return false;
-}
-
-void checkForXOR2(string &minimizedExpression)
-{
-    if (minimizedExpression == "A'B + AB'")
-    {
-        minimizedExpression = "A XOR B";
-    }
-    else if (minimizedExpression == "AC' + AC'")
-    {
-        minimizedExpression = "A XOR C";
-    }
-    else if (minimizedExpression == "A'D + AD'")
-    {
-        minimizedExpression = "A XOR D";
-    }
-    else if (minimizedExpression == "B'C + BC'")
-    {
-        minimizedExpression = "B XOR C";
-    }
-    else if (minimizedExpression == "B'D + BD'")
-    {
-        minimizedExpression = "B XOR D";
-    }
-    else if (minimizedExpression == "C'D + CD'")
-    {
-        minimizedExpression = "C XOR D";
-    }
 }
