@@ -4,14 +4,14 @@ This project contains a robust and efficient KMap Solver developed in C++. The p
 
 ## Table of Contents
 
-- [Preview](#preview)
+- [Tutorial](#tutorial)
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
 
-## Preview
+## Tutorial
 ![tutorial.gif](./assets/tutorial.gif?raw=true)
 
 ## Features
