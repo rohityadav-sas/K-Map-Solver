@@ -309,6 +309,16 @@ void Grid::visualizeKmap()
             }
             UnloadTexture(background);
             CloseWindow();
+            const char *command = "powershell.exe -Command \"./game.exe\"";
+            int result = system(command);
+            if (result == 0)
+            {
+                std::cout << "Command executed successfully." << std::endl;
+            }
+            else
+            {
+                std::cerr << "Command execution failed with error code: " << result << std::endl;
+            }
             break;
         }
     }

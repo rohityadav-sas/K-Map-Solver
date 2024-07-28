@@ -23,27 +23,27 @@ Rectangle buttons[4] = {
     {(2 * screenWidth) / 5 - 25, 225, 70, 50},
     {(3 * screenWidth) / 5 - 25, 225, 70, 50},
     {(4 * screenWidth) / 5 - 25, 225, 70, 50}};
-void listenHover(); //changes color and mouse pointer when hovered over variable buttons
+void listenHover(); // changes color and mouse pointer when hovered over variable buttons
 
 int main()
-{ 
-    //Objects for drawing each variable grids
+{
+    // Objects for drawing each variable grids
     twoVar grid2;
     threeVar grid3;
     fourVar grid4;
     fiveVar grid5;
-    int currentGrid = 0; //So that no grid is drawin when window loads
+    int currentGrid = 0; // So that no grid is drawin when window loads
     Image icon = LoadImage("./assets/kmap.png");
-    InitWindow(screenWidth, screenHeight, "K-Map Solver"); //initializes the window
-    Screen currentScreen = HOME; //sets the loaded window to HOME screen
+    InitWindow(screenWidth, screenHeight, "K-Map Solver"); // initializes the window
+    Screen currentScreen = HOME;                           // sets the loaded window to HOME screen
     Texture2D texture = LoadTexture("./assets/bgimg3.png");
     Font Titlefont = LoadFont("./fonts/batman.ttf");
     Font Bodyfont = LoadFont("./fonts/unispace.ttf");
     SetWindowIcon(icon);
     UnloadImage(icon);
-    SetTargetFPS(60); //Window FPS
+    SetTargetFPS(60); // Window FPS
     {
-        while (!WindowShouldClose()) //Run the code until you close the window
+        while (!WindowShouldClose()) // Run the code until you close the window
         {
             BeginDrawing();
             ClearBackground(RAYWHITE);
@@ -65,7 +65,7 @@ int main()
                 DrawRectangleRounded(buttons[i], 0.2, 0, buttonColors[i]);
                 DrawText(buttonTexts[i], buttons[i].x + (50 - MeasureText(buttonTexts[i], 22)) / 2 + 10, buttons[i].y + (50 - 20) / 2, 20, BLACK);
             }
-            listenHover(); //checks mouse hover over the variable option's buttons
+            listenHover(); // checks mouse hover over the variable option's buttons
 
             if (currentScreen == HOME)
             {
@@ -230,14 +230,14 @@ int main()
                 }
             }
 
-            if (currentGrid == 2) //if curentScreen is TWOVAR then currentGrid is 2. So it draws the two variable's grid
+            if (currentGrid == 2) // if curentScreen is TWOVAR then currentGrid is 2. So it draws the two variable's grid
             {
-                grid2.Draw(); //draw method draws the grid
-                grid2.listenClick(); //Changes 1 to 0 and 0 to 1 when clicked inside the grid cells
-                grid2.listenHover(); //changes mouse pointer to pointing hand when hovered over grid area
-                grid2.calculateButton(Bodyfont); //Draws the calculate button
-                grid2.visualizeButton(Bodyfont); //Draws the visualize button
-                if (grid2.resultCalculated) //Draws 'Result: [Result Expression]' if resultCalulated is True 
+                grid2.Draw();                    // draw method draws the grid
+                grid2.listenClick();             // Changes 1 to 0 and 0 to 1 when clicked inside the grid cells
+                grid2.listenHover();             // changes mouse pointer to pointing hand when hovered over grid area
+                grid2.calculateButton(Bodyfont); // Draws the calculate button
+                grid2.visualizeButton(Bodyfont); // Draws the visualize button
+                if (grid2.resultCalculated)      // Draws 'Result: [Result Expression]' if resultCalulated is True
                 {
                     grid2.resultButton(Bodyfont);
                 }
