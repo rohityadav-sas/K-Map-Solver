@@ -31,18 +31,21 @@ This project contains a robust and efficient KMap Solver developed in C++. The p
    Add the following path to your system environment variables:
    ```bash
    C:\raylib\w64devkit\bin
+   ```
 
 3. **Navigate to Source Directory**:
 
    Open a terminal and navigate to the following path:
    ```bash
    C:\raylib\raylib\src
+   ```
 
 4. **Compile Raylib**:
 
    In the terminal, run the following command:
    ```bash
    mingw32-make PLATFORM=PLATFORM_DESKTOP
+   ```
 
 5. **Locate Compiled Library**:
 
@@ -53,19 +56,26 @@ This project contains a robust and efficient KMap Solver developed in C++. The p
    Copy the newly created libraylib.a file and replace the existing ```libraylib.a``` file in the lib folder within your project directory.
 
 7. **Create Makefile**:
-
-   Create a Makefile in your project directory and add the following content:
    ```bash
-   # Define the source files for the project
-   SOURCES = ./src/fourvar.cpp ./src/grid.cpp ./src/kmapsolver.cpp ./src/main.cpp ./src/threevar.cpp ./src/twovar.cpp
+   # List of source files
+   SOURCES = ./src/fivevar.cpp ./src/fourvar.cpp ./src/grid.cpp ./src/kmapsolver.cpp ./src/main.cpp ./src/threevar.cpp ./src/twovar.cpp ./src/http_request.cpp
 
-   # Default target to compile the project
+   # Include directory for your headers
+   INCLUDE_DIRS_PROJECT = include/
+   INCLUDE_DIRS_CURL = C:/curl/include
+
+   # Library directories for linking
+   LIB_DIRS_PROJECT = lib/
+   LIB_DIRS_CURL = C:/curl/lib
+
+   # Compiler and linker flags
+   CXXFLAGS = -g -O1 -Wall -Wno-missing-braces
+   LDFLAGS = -lraylib -lopengl32 -lgdi32 -lwinmm -lcurl
+
    default:
-    # Compile the source files into an executable named game.exe
-    g++ $(SOURCES) -o ./build/game.exe -g -O1 -Wall -Wno-missing-braces -I include/ -L lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
-    
-    # Run the compiled executable
-    ./build/game.exe
+      g++ $(SOURCES) -o kmap.exe my.res $(CXXFLAGS) -I$(INCLUDE_DIRS_CURL) -I$(INCLUDE_DIRS_PROJECT) -L$(LIB_DIRS_CURL) -L$(LIB_DIRS_PROJECT)  $(LDFLAGS) -Wl,--subsystem,windows
+      ./kmap.exe
+   ```
 
 
 8. **Run the Program**:
@@ -73,7 +83,7 @@ This project contains a robust and efficient KMap Solver developed in C++. The p
    To compile and run the program, execute the following command in the terminal:
    ```bash
    make
-   
+   ```
 ## Usage
 Click on the cells in the K-Map Grid to flip between 0 and 1. After configuring your K-Map, click the "Calculate" button to compute the minterms. The "Visualize" option allows you to see the K-Map Expression using logic gates.
 
