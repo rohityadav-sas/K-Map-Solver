@@ -1,19 +1,19 @@
-#include "kmapsolver.h" // Include the header file for KMapSolver class which likely handles Karnaugh map solving operations
-#include "grid.h"       // Include the header file for Grid class which likely handles grid-related functionalities
-#include <raylib.h>     // Include the Raylib library for graphics and game development functions
-#include <cstring>      // Include the C string library for handling C-style strings and various string manipulation functions
-#include <iostream>     // Include the input/output stream library for handling standard input and output operations
-#include <algorithm>    // Include the algorithm library for common algorithms like sorting, searching, etc.
-#include <cmath>        // Include the math library for mathematical functions and calculations
-#include <cstdlib>      // Include the standard library for general purpose functions like memory allocation, random number generation, etc.
-#include <string>       // Include the string library for handling C++ style strings
-#include <thread>       // Include the thread library for multi-threading functionalities
-#include <chrono>       // Include the chrono library for time-related functions, such as measuring time intervals
-#include <filesystem>   // Include the filesystem library for file and directory manipulation
-#include <cstdio>       // Include the C standard input/output library for C-style input and output functions
-#include <future>       // Include the future library for asynchronous programming and concurrency
-                        // compiler moves on to other lines while compiling
-
+#include "kmapsolver.h"   // Include the header file for KMapSolver class which likely handles Karnaugh map solving operations
+#include "http_request.h" // Include the header file for HTTPRequest class which likely handles HTTP request operations
+#include "grid.h"         // Include the header file for Grid class which likely handles grid-related functionalities
+#include <raylib.h>       // Include the Raylib library for graphics and game development functions
+#include <cstring>        // Include the C string library for handling C-style strings and various string manipulation functions
+#include <iostream>       // Include the input/output stream library for handling standard input and output operations
+#include <algorithm>      // Include the algorithm library for common algorithms like sorting, searching, etc.
+#include <cmath>          // Include the math library for mathematical functions and calculations
+#include <cstdlib>        // Include the standard library for general purpose functions like memory allocation, random number generation, etc.
+#include <string>         // Include the string library for handling C++ style strings
+#include <thread>         // Include the thread library for multi-threading functionalities
+#include <chrono>         // Include the chrono library for time-related functions, such as measuring time intervals
+#include <filesystem>     // Include the filesystem library for file and directory manipulation
+#include <cstdio>         // Include the C standard input/output library for C-style input and output functions
+#include <future>         // Include the future library for asynchronous programming and concurrency
+                          // compiler moves on to other lines while compiling
 using namespace std;
 
 namespace fs = std::filesystem;
@@ -250,8 +250,9 @@ void Grid::SimulateLoading(float duration)
 
 void performHttpRequest(string Uri, string body)
 {
-    string command = "powershell.exe -Command \"Invoke-WebRequest -Uri " + Uri + " -Method Post -Body '" + body + "' -OutFile './build/circuit.png' > $null\"";
-    system(command.c_str());
+    // string command = "powershell.exe -Command \"Invoke-WebRequest -Uri " + Uri + " -Method Post -Body '" + body + "' -OutFile './build/circuit.png' > $null\"";
+    // system(command.c_str());
+    postRequest(Uri, body, "./build/circuit.png");
 }
 
 void Grid::visualizeKmap()
@@ -287,7 +288,7 @@ void Grid::visualizeKmap()
     InitWindow(screenWidth, screenHeight, "Loading...");
     SetWindowIcon(icon);
     UnloadImage(icon);
-    SimulateLoading(3.0f);
+    SimulateLoading(2.0f);
     while (true)
     {
         if (fs::exists(filename))
@@ -309,7 +310,7 @@ void Grid::visualizeKmap()
             }
             UnloadTexture(background);
             CloseWindow();
-            const char *command = "powershell.exe -Command \"./game.exe\"";
+            const char *command = "powershell.exe -Command \"./kmap.exe\"";
             int result = system(command);
             if (result == 0)
             {

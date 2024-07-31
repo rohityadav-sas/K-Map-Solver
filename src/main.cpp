@@ -33,7 +33,7 @@ int main()
     fourVar grid4;
     fiveVar grid5;
     int currentGrid = 0; // So that no grid is drawin when window loads
-    Image icon = LoadImage("./assets/kmap.png");
+    Image icon = LoadImage("./assets/icon.png");
     InitWindow(screenWidth, screenHeight, "K-Map Solver"); // initializes the window
     Screen currentScreen = HOME;                           // sets the loaded window to HOME screen
     Texture2D texture = LoadTexture("./assets/bgimg3.png");
