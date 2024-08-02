@@ -57,7 +57,7 @@ This project contains a robust and efficient KMap Solver developed in C++. The p
 
 7. **Create Makefile**:
    ```bash
-   # List of source files
+   **List of source files**
    SOURCES = ./src/fivevar.cpp ./src/fourvar.cpp ./src/grid.cpp ./src/kmapsolver.cpp ./src/main.cpp ./src/threevar.cpp ./src/twovar.cpp ./src/http_request.cpp
 
    # List of object files (replace .cpp with .o)
