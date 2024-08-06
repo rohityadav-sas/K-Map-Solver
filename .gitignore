@@ -1,4 +1,5 @@
 *.exe
+*.o
 .vscode
 node_modules
 circuit.png
