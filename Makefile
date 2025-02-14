@@ -7,13 +7,14 @@ OBJECTS = $(SOURCES:.cpp=.o)
 # Include directory for your headers
 INCLUDE_DIRS_PROJECT = include/
 INCLUDE_DIRS_CURL = C:/curl/include
+INCLUDE_DIRS_RAYLIB = C:/raylib/raylib/src
 
 # Library directories for linking
 LIB_DIRS_PROJECT = lib/
 LIB_DIRS_CURL = C:/curl/lib
 
 # Compiler and linker flags
-CXXFLAGS = -g -O1 -Wall -Wno-missing-braces -I $(INCLUDE_DIRS_CURL) -I $(INCLUDE_DIRS_PROJECT)
+CXXFLAGS = -g -O1 -Wall -Wno-missing-braces -I $(INCLUDE_DIRS_CURL) -I $(INCLUDE_DIRS_PROJECT) -I $(INCLUDE_DIRS_RAYLIB)
 LDFLAGS = -L $(LIB_DIRS_CURL) -L $(LIB_DIRS_PROJECT) -lraylib -lopengl32 -lgdi32 -lwinmm -lcurl
 REMOVE_TERMINAL_FLAGS = -Wl,--subsystem,windows
 
